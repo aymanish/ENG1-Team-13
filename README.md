@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## ENG1 Team 13
 
 You can use the [editor on GitHub](https://github.com/apj520/ENG1-Team-13/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
 
