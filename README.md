@@ -8,12 +8,7 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 ```markdown
 
 
-
-
 [Link](url) 
-
-
-
 
 
 ```
@@ -22,14 +17,11 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 
 
 ```markdown
-
-
-
-
-[Link](https://drive.google.com/drive/folders/15Ql4OmnoxzRCbZdIQLNa4MssSRYV9Ell?usp=sharing) 
-
-
-
-
-
+[Google Drive](https://drive.google.com/drive/folders/15Ql4OmnoxzRCbZdIQLNa4MssSRYV9Ell?usp=sharing) 
+[Requirements](url) 
+[Risks](url) 
+[Implementation](url) 
+[Planning](url) 
+[Architecture](url) 
+[Link](url) 
 ```
