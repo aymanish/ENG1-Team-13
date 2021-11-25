@@ -25,3 +25,16 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 [Architecture](url) 
 [Link](url) 
 ```
+
+
+### Weekly Planning Snapshots
+
+
+```markdown
+[18/11/2021]
+[25/11/2021]
+
+
+
+
+```
