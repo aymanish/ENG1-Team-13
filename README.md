@@ -31,7 +31,7 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 
 
 ```markdown
-[TEST](https://github.com/apj520/ENG1-Team-13/blob/41259b754ab70d2a3c308e607621b12a5f923aab/Weekly_Snapshots/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000.png)
+[TEST](Weekly_Snapshots/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000.png)
 [18/11/2021]
 [25/11/2021]
 
