@@ -29,7 +29,7 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 
 ### Weekly Planning Snapshots
 
-[TEST](Weekly_Snapshots/Test.png)
+[TEST](Weekly_Snapshots/Test.pdf)
 ```markdown
 [TEST](Weekly_Snapshots/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000.png)
 [18/11/2021]
