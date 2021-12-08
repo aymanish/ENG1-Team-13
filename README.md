@@ -21,11 +21,17 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 [Architecture](url) 
  
 
-### Weekly Planning Snapshots
+### Planning and Weekly Snapshots
+####Planning Overview
+[Planning Overview](url)
 
+####Weekly Snapshots
 [TEST](Weekly_Snapshots/Test.pdf)
 
+[18/11/2021](url)
 
+[25/11/2021](url)
 
-### Planning Overview
-[Planning Overview](url)
+[02/12/2021](url)
+
+[09/12/2021](url)
