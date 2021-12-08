@@ -22,10 +22,13 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
  
 
 ### Planning and Weekly Snapshots
-####Planning Overview
+
+#### Planning Overview
+
 [Planning Overview](url)
 
-####Weekly Snapshots
+#### Weekly Snapshots
+
 [TEST](Weekly_Snapshots/Test.pdf)
 
 [18/11/2021](url)
