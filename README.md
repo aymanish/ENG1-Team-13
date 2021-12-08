@@ -8,16 +8,18 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 
 ### Documentation
 
-
-
 [Google Drive](https://drive.google.com/drive/folders/15Ql4OmnoxzRCbZdIQLNa4MssSRYV9Ell?usp=sharing) 
-[Requirements](url) 
-[Risks](url) 
-[Implementation](url) 
-[Planning](url) 
-[Architecture](url) 
-[Link](url) 
 
+[Requirements](url) 
+
+[Risks](Documentation/Risks1_NONFINAL.pdf) 
+
+[Implementation](url) 
+
+[Planning](url) 
+
+[Architecture](url) 
+ 
 
 ### Weekly Planning Snapshots
 
@@ -26,3 +28,4 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 
 
 ### Planning Overview
+[Planning Overview](url)
