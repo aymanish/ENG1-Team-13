@@ -31,10 +31,10 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 Please note that the Red line on each snapshot signifies the end of the respective calender week.
 
 
-[18/11/2021](Weekly_Snapshots/Aut8.png)
+[15/11/2021](Weekly_Snapshots/Aut8.png)
 
-[25/11/2021](Weekly_Snapshots/Aut9.png)
+[22/11/2021](Weekly_Snapshots/Aut9.png)
 
-[02/12/2021](Weekly_Snapshots/Aut10.png)
+[29/11/2021](Weekly_Snapshots/Aut10.png)
 
-[09/12/2021](Weekly_Snapshots/Win1.png)
+[06/12/2021](Weekly_Snapshots/Win1.png)
