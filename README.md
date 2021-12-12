@@ -28,7 +28,7 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 [Planning Overview](url)
 
 #### Weekly Snapshots
-Please note that the Red line on each snapshot signifgies the end of the respective calender week.
+Please note that the Red line on each snapshot signifies the end of the respective calender week.
 
 
 [18/11/2021](Weekly_Snapshots/Aut8.png)
