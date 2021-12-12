@@ -28,13 +28,13 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 [Planning Overview](url)
 
 #### Weekly Snapshots
+Please note that the Red line on each snapshot signifgies the end of the respective calender week.
 
-[TEST](Weekly_Snapshots/Test.pdf)
 
-[18/11/2021](url)
+[18/11/2021](Weekly_Snapshots/Aut8.png)
 
-[25/11/2021](url)
+[25/11/2021](Weekly_Snapshots/Aut9.png)
 
-[02/12/2021](url)
+[02/12/2021](Weekly_Snapshots/Aut10.png)
 
-[09/12/2021](url)
+[09/12/2021](Weekly_Snapshots/Win1.png)
