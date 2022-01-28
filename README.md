@@ -38,3 +38,17 @@ Please note that the Red line on each snapshot signifies the end of the respecti
 [29/11/2021](Weekly_Snapshots/Aut10.png)
 
 [06/12/2021](Weekly_Snapshots/Win1.png)
+
+[13/12/2021](Weekly_Snapshots/Win1.png)
+
+[20/12/2021](Weekly_Snapshots/Win1.png)
+
+[27/12/2021](Weekly_Snapshots/Win1.png)
+
+[03/01/2022](Weekly_Snapshots/Win1.png)
+
+[10/01/2022](Weekly_Snapshots/Win1.png)
+
+[17/01/2022](Weekly_Snapshots/Win1.png)
+
+[24/01/2022](Weekly_Snapshots/Win1.png)
