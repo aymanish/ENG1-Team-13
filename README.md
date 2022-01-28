@@ -10,16 +10,17 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 
 [Google Drive](https://drive.google.com/drive/folders/15Ql4OmnoxzRCbZdIQLNa4MssSRYV9Ell?usp=sharing) 
 
-[Requirements](url) 
+[2. Requirements](url) 
 
-[Risks](Documentation/Risks1_NONFINAL.pdf) 
+[3. Architecture](url)
 
-[Implementation](url) 
+[4. Method Selecton and Planning](url)
 
-[Planning](url) 
+[5. Risk Assessment and Mitigation](Documentation/Risks1_NONFINAL.pdf) 
 
-[Architecture](url) 
+[6. Implementation](url) 
  
+
 
 ### Planning and Weekly Snapshots
 
