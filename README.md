@@ -4,11 +4,9 @@ Welcome to our site. Here you will find all of the nessesary URLs containing eve
 
 ### Code
 
-[Link](url) 
-
-### Documentation
-
 [Google Drive](https://drive.google.com/drive/folders/15Ql4OmnoxzRCbZdIQLNa4MssSRYV9Ell?usp=sharing) 
+
+### Deliverables
 
 [2. Requirements](url) 
 
