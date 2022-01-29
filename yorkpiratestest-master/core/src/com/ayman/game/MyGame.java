@@ -37,9 +37,8 @@ public class MyGame extends Game {
 
 		//initialize players
 		player = new PlayerShip();
-		player2 = new PlayerShip();
-		player2.x = 800;
-		player2.y = 800;
+
+		//initialize npc ships
 
 		//initialize colleges;
 		AnneLister = new AnneLister();

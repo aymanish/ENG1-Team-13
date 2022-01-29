@@ -16,10 +16,11 @@ import static java.lang.Math.abs;
 
 public class PlayerShip extends Ship{
 
-    public int HP = 3;
+    public int HP = 5;
     public int POINTS = 0;
     public Sprite playerSprite;
     public Rectangle rectPlayer;
+    private final int MAX_BULLETS = 5;
 
     public PlayerShip() {
 
@@ -42,6 +43,8 @@ public class PlayerShip extends Ship{
 
         radians = 3.1415f / 2;
         rotationSpeed = 3;
+
+        bullets = new ArrayList<>();
     }
 
     //player ship control based on input bools:
@@ -75,6 +78,8 @@ public class PlayerShip extends Ship{
             dx -= (dx/vec)*deceleration*dt;
             dy -= (dy/vec)*deceleration*dt;
         }
+
+        //speed limiter
         if (vec > maxSpeed) {
             dx = (dx/vec)*maxSpeed;
             dy = (dy/vec)*maxSpeed;
@@ -92,8 +97,28 @@ public class PlayerShip extends Ship{
         rectPlayer.x = this.x;
         rectPlayer.y = this.y;
 
+        //bullet fire
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+            shoot();
+        }
+
         //boundaries:
         boundaries();
+    }
+
+    public void shoot() {
+        if (bullets.size() < MAX_BULLETS) {
+            bullets.add(new Bullet(x, y, this.radians));
+            System.out.println(bullets.size());
+        }
+    }
+
+    public void removeBullets() {
+        for (Bullet i : bullets) {
+            if (i.isRemove()) {
+                bullets.remove(i);
+            }
+        }
     }
 
     public boolean isDead() {

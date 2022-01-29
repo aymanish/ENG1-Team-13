@@ -5,6 +5,7 @@ import com.ayman.game.MyGame;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -13,8 +14,6 @@ import sun.security.mscapi.CPublicKey;
 
 public class GameScreen extends ScreenAdapter {
     MyGame game;
-
-    //public Rectangle rectPlayer2;
 
     public GameScreen(MyGame game_instance) {
         this.game = game_instance;
@@ -29,14 +28,6 @@ public class GameScreen extends ScreenAdapter {
 
         //move player sprite based on input
         game.player.update(delta);
-        //game.player2.update(delta);
-
-        //set rectangles for collision:
-
-
-
-        //rectPlayer2.x = game.player2.x;
-        //rectPlayer2.y = game.player2.y;
 
         //camera follows player after player sprite moves (player.update called)
         game.camera.position.set(game.player.x, game.player.y, 0);
@@ -59,7 +50,7 @@ public class GameScreen extends ScreenAdapter {
         //college:
         game.AnneLister.collegeSprite.setPosition(game.AnneLister.x, game.AnneLister.y);
         game.AnneLister.collegeSprite.draw(game.batch);
-        game.batch.draw(game.AnneLister.AOE, game.AnneLister.collegeAOE.x, game.AnneLister.collegeAOE.y);
+        //game.batch.draw(game.AnneLister.AOE, game.AnneLister.AOE.x, game.AnneLister.AOE.y);
 
         //game.player.boundary.draw(game.batch);
         //player3:
@@ -69,6 +60,13 @@ public class GameScreen extends ScreenAdapter {
         game.font.draw(game.batch, "\nx: "+ game.player.x+"    y: "+game.player.y+" \n   shipAngle: "+game.player.angle+" \n shipR: "+game.player.radians +" \n DX: "+game.player.dx + " DY: "+game.player.dy , 700, 700); //Gdx.graphics.getWidth() * .15f
         game.font.draw(game.batch, "\nHP: " + game.player.HP + "\nP: " + game.player.POINTS, game.player.x+game.player.width, game.player.y+game.player.height);
         game.font.draw(game.batch, "\nHP: " + game.AnneLister.HP + "\nP: " + game.AnneLister.POINTS+ "\nC: " + game.AnneLister.isCaptured(), game.AnneLister.x+game.AnneLister.width, game.AnneLister.y+game.AnneLister.height);
+
+        //draw bullets
+        for (int i = 0; i < game.player.bullets.size(); i++) {
+            game.player.bullets.get(i).bulletSprite.draw(game.batch);
+        }
+        //remove bullets
+        //game.player.removeBullets();
 
         game.batch.end();
 
@@ -94,8 +92,7 @@ public class GameScreen extends ScreenAdapter {
         //    game.player2.dy = -3*game.player2.dy/2;
         //}
 
-        boolean isAOEOverlap = game.player.rectPlayer.overlaps(game.AnneLister.collegeAOE);
-        if ((isAOEOverlap)) {
+        if (Intersector.overlaps(game.AnneLister.AOE, game.player.rectPlayer)) {
             System.out.println("AOE Hit");
         }
         //PLAYER-COLLEGE COLLISION

@@ -4,31 +4,30 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 
 import java.util.ArrayList;
 
 public class College extends GameObject{
 
-    public Rectangle rectCollege, collegeAOE;
-    public Texture AOE;
+    public Circle AOE;
     public float radians = 0;
     public int HP, POINTS;
     public Sprite collegeSprite;
     public Rectangle boundRect;
+    public ArrayList<Bullet> bullets;
 
     public College() {
 
         width = 174;
         height = 125;
 
-        //initialize AOE *******SHOULDNT THIS vvvv BE IN TEXTUREATLAS?***********
-        AOE = new Texture(Gdx.files.internal("collegeAOE.png"));
-        collegeAOE = new Rectangle();
-        collegeAOE.x = this.x - this.width/2f;
-        collegeAOE.y = this.y - this.height/2f;
-        collegeAOE.width = this.width*2;
-        collegeAOE.height = this.height*2;
+        AOE = new Circle(x,y,400);
+        //AOE.x = this.x - this.width/2f;
+        //AOE.y = this.y - this.height/2f;
+        //AOE.width = this.width*2;
+        //AOE.height = this.height*2;
     }
 
     //college firing system, we will return a sprite bullet when called

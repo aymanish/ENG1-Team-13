@@ -3,46 +3,55 @@ package com.ayman.entities;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Bullet extends GameObject {
 
-    private float lifeTime;
-    private float lifeTimer;
-
-    private boolean remove;
+    private float timeLimit;
+    private float timer;
 
     public Sprite bulletSprite;
-    public TextureAtlas textureAtlas;
+    public Rectangle rectBullet;
 
     public Bullet(float x, float y, float radians) {
+
+        bulletSprite = textureAtlas.createSprite("bullet");
+
+        rectBullet = bulletSprite.getBoundingRectangle();
+
+        width = height = 18;
         this.x = x;
         this.y = y;
         this.radians = radians;
 
-        textureAtlas = new TextureAtlas("sprites.txt");
-        //bulletSprite = textureAtlas.createSprite("bullet");
-
-        float speed = 350;
+        //set bullet speed
+        float speed = 100;
         dx = MathUtils.cos(radians)*speed;
         dy = MathUtils.sin(radians)*speed;
 
-        width = height = 18;
-        lifeTimer = 0;
-        lifeTime = 3;
+        timer = 0;
+        timeLimit = 1;
     }
 
-    public boolean shouldRemove() {return remove;}
+    public boolean isRemove() {
+        if ((timer > timeLimit)) { //add or logical check for bullet overlap with college/other players
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     public void update(float dt){
         x += dx * dt;
-        y = dy * dt;
+        y += dy * dt;
 
-        //bulletSprite.setX(x);
-        //bulletSprite.setY(y);
+        bulletSprite.setX(x);
+        bulletSprite.setY(y);
 
-        lifeTimer += dt;
-        if (lifeTimer > lifeTime) {
-            remove = true;
-        }
+        rectBullet.x = x;
+        rectBullet.y = y;
+
+        timer += dt;
     }
 }
