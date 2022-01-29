@@ -23,10 +23,6 @@ public class Weapon extends GameObject{
     private float deceleration;
 
     public float angle;
-    public Sprite aimer;
-    public TextureAtlas textureAtlas;
-
-
 
 
     //ammo
@@ -48,10 +44,6 @@ public class Weapon extends GameObject{
         shapeY = new float[4];
 
         radians = 3.1415f / 2;
-        rotationSpeed = 3;
-
-        textureAtlas = new TextureAtlas("sprites.txt");
-        aimer = textureAtlas.createSprite("aimer");
     }
 
     //booleans for input checks in game screen.java
@@ -64,20 +56,11 @@ public class Weapon extends GameObject{
     //player ship control based on input bools:
     public void update(float dt) {
 
-        //turn:
-        if (left) {
-            radians += rotationSpeed * dt;
-        }
-        else if (right) {
-            radians -= rotationSpeed * dt;
-        }
-
         //rotate sprite based on rads:
         angle = (MathUtils.radiansToDegrees * radians) - 90;
         if(angle != 0){
             angle = angle % 360;
         }
-        aimer.setRotation(angle);
 
         //accelerating/movement:
         if (up) {
@@ -100,12 +83,5 @@ public class Weapon extends GameObject{
         //set position:
         x += dx*dt;
         y += dy*dt;
-
-        //set sprite position as well otherwise sprite wont move
-        aimer.setX(x);
-        aimer.setY(y);
-
-        //boundaries:
-        boundaries();
     }
 }

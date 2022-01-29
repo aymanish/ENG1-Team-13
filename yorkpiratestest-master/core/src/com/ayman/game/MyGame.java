@@ -1,47 +1,52 @@
 package com.ayman.game;
-import com.ayman.entities.Bullet;
-import com.ayman.entities.College;
-import com.ayman.entities.PlayerShip;
-import com.ayman.entities.Weapon;
+import com.ayman.entities.*;
 import com.ayman.screen.TitleScreen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyGame extends Game {
 	//initialize shared resources: camera, font, spritebatch and game objects
 	public OrthographicCamera camera;
 	public BitmapFont font;
 	public SpriteBatch batch;
-	public PlayerShip player, player2, player3;
+	public Map map;
+	public PlayerShip player, player2;
 	public College AnneLister;
-	public Weapon playerWeapon;
-	public ArrayList<Bullet> bullets;
+	private ArrayList<College> collegeList = new ArrayList<>();
 
 	//shared resources
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
+
 		//camera setup: viewport 0.5 x smaller that game screen:
 		//viewport ratio should be same as game screen ratio to maintain aspect ratio/avoid distortion:
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
-		//BULLETS ADD TO PLAYER AND THEN WEAPON:
-		bullets = new ArrayList<Bullet>();
+
+		//initialize map
+		map = new Map();
+
 		//initialize players
-		player = new PlayerShip(bullets);
-		player2 = new PlayerShip(bullets);
+		player = new PlayerShip();
+		player2 = new PlayerShip();
 		player2.x = 800;
 		player2.y = 800;
-		//player3 = new PlayerShip(bullets);
-		//initialize weapon aim:
-		playerWeapon = new Weapon();
-		//college
-		AnneLister = new College();
+
+		//initialize colleges;
+		AnneLister = new AnneLister();
+
+		//initialize list of colleges
+		collegeList = new ArrayList<>();
+		collegeList.add(AnneLister);
 
 		//set screen to title screen always upon startup:
 		setScreen(new TitleScreen(this));
