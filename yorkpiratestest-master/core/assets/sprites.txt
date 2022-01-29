@@ -1,0 +1,82 @@
+sprites.png
+size: 3000, 2252
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+aimer
+  rotate: false
+  xy: 43, 0
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+anneLister_island
+  rotate: false
+  xy: 113, 0
+  size: 165, 126
+  orig: 165, 126
+  offset: 0, 0
+  index: -1
+anneLister_island_captured
+  rotate: false
+  xy: 278, 0
+  size: 165, 126
+  orig: 165, 126
+  offset: 0, 0
+  index: -1
+boundary
+  rotate: false
+  xy: 0, 252
+  size: 3000, 2000
+  orig: 3000, 2000
+  offset: 0, 0
+  index: -1
+bullet
+  rotate: false
+  xy: 0, 0
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+collegeAOE
+  rotate: false
+  xy: 1137, 0
+  size: 330, 252
+  orig: 330, 252
+  offset: 0, 0
+  index: -1
+constantine_island
+  rotate: false
+  xy: 783, 0
+  size: 177, 123
+  orig: 177, 123
+  offset: 0, 0
+  index: -1
+constantine_island_captured
+  rotate: false
+  xy: 960, 0
+  size: 177, 123
+  orig: 177, 123
+  offset: 0, 0
+  index: -1
+goodricke_island
+  rotate: false
+  xy: 443, 0
+  size: 170, 126
+  orig: 170, 126
+  offset: 0, 0
+  index: -1
+goodricke_island_capture
+  rotate: false
+  xy: 613, 0
+  size: 170, 126
+  orig: 170, 126
+  offset: 0, 0
+  index: -1
+ship_up
+  rotate: false
+  xy: 18, 0
+  size: 25, 63
+  orig: 25, 63
+  offset: 0, 0
+  index: -1
