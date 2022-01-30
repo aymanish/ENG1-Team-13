@@ -16,13 +16,15 @@ import static java.lang.Math.abs;
 
 public class PlayerShip extends Ship{
 
-    public int HP = 5;
+    public int HP = 3;
     public int POINTS = 0;
     public Sprite playerSprite;
     public Rectangle rectPlayer;
     private final int MAX_BULLETS = 5;
 
-    public PlayerShip() {
+    public PlayerShip(ArrayList<Bullet> bullets) {
+
+        this.bullets = bullets;
 
         sprite = textureAtlas.createSprite("ship_up");
 
@@ -43,7 +45,6 @@ public class PlayerShip extends Ship{
         radians = 3.1415f / 2;
         rotationSpeed = 3;
 
-        bullets = new ArrayList<>();
     }
 
     //player ship control based on input bools:
@@ -97,6 +98,7 @@ public class PlayerShip extends Ship{
 
         //bullet fire
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+            System.out.println("PLAYER SHOOTING");
             shoot();
         }
 
@@ -107,15 +109,24 @@ public class PlayerShip extends Ship{
     public void shoot() {
         if (bullets.size() < MAX_BULLETS) {
             bullets.add(new Bullet(x, y, this.radians));
+            System.out.println("BULLET ADDED");
         }
     }
 
+    //DONE IN GAMESCREEN INSTEAD: SEE UPDATE BULLETS SECTION
+    /*
     public void removeBullets() {
         for (Bullet i : bullets) {
             if (i.isRemove()) {
                 bullets.remove(i);
             }
         }
+    }
+     */
+
+    public void playerHit() {
+        HP --;
+        isAttacked = false;
     }
 
     public boolean isDead() {

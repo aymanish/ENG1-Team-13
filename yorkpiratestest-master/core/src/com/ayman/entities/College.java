@@ -12,22 +12,46 @@ import java.util.ArrayList;
 public class College extends GameObject{
 
     public Circle AOE;
-    public float radians = 0;
+    public float radians = 3.1415f/2;
     public int HP, POINTS;
     public Sprite collegeSprite;
     public Rectangle boundRect;
     public ArrayList<Bullet> bullets;
 
+    //aymans addition:
+    public boolean isAttacked;
+    public boolean isAOE;
+    private final int MAX_COLLEGE_BULLETS = 4;
+    public boolean isCaptured;
+
+
+
+
+
     public College() {
+
+        this.bullets = new ArrayList<Bullet>();
+
+
 
         width = 174;
         height = 125;
 
-        AOE = new Circle(x,y,400);
+        //what value are these x and y?
+        AOE = new Circle(x,y,250);
+
+        isAttacked = false;
+        isCaptured = false;
+        isAOE = false;
     }
 
     //college firing system, we will return a sprite bullet when called
-    //public void shoot() {
+    public void shoot() {
+        if (!isCaptured) {
+            if (bullets.size() == MAX_COLLEGE_BULLETS) {return;}
+            bullets.add(new Bullet(x + width/2, y + height/2, radians));
+        }
+    }
         //if (!isCaptured() && playerInRange()) {
             //return bullet with correct direction etc
             //need to implement firing rate somehow possibly in game screen section or
@@ -46,9 +70,14 @@ public class College extends GameObject{
   //  }
     //what happens to a college when said college is hit by a bullet from player
     public void collegeHit() {
-        HP--;
+        if (!isCaptured) {
+            HP--;
+            isAttacked = false;
+        }
+
         //players point gains in fireSuccess() method in PlayerShip class
     }
+    /*
     //checks if college has been captured
     public boolean isCaptured() {
         if (HP == 0) {
@@ -58,4 +87,8 @@ public class College extends GameObject{
             return false;
         }
     }
+
+     */
+
+
 }

@@ -20,6 +20,8 @@ public class MyGame extends Game {
 	public PlayerShip player, player2;
 	public College AnneLister;
 	private ArrayList<College> collegeList = new ArrayList<>();
+	public ArrayList<Bullet> bullets;
+
 
 	//shared resources
 	@Override
@@ -36,7 +38,8 @@ public class MyGame extends Game {
 		map = new Map();
 
 		//initialize players
-		player = new PlayerShip();
+		bullets = new ArrayList<Bullet>();
+		player = new PlayerShip(bullets);
 
 		//initialize npc ships
 

@@ -1,82 +1,68 @@
 sprites.png
-size: 2002, 3256
+size: 4067, 2000
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-aimer
-  rotate: true
-  xy: 84, 1
-  size: 61, 69
-  orig: 70, 70
-  offset: 3, 1
-  index: -1
 anneLister_island
   rotate: false
-  xy: 513, 1
+  xy: 0, 0
   size: 165, 126
   orig: 165, 126
   offset: 0, 0
   index: -1
 anneLister_island_captured
   rotate: false
-  xy: 680, 1
+  xy: 165, 0
   size: 165, 126
   orig: 165, 126
   offset: 0, 0
   index: -1
 boundary
-  rotate: true
-  xy: 1, 255
+  rotate: false
+  xy: 330, 0
   size: 3000, 2000
   orig: 3000, 2000
   offset: 0, 0
   index: -1
 bullet
   rotate: false
-  xy: 1, 1
+  xy: 3330, 0
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
-collegeAOE
-  rotate: false
-  xy: 1191, 1
-  size: 330, 252
-  orig: 330, 252
-  offset: 0, 0
-  index: -1
 constantine_island
   rotate: false
-  xy: 155, 1
+  xy: 3348, 0
   size: 177, 123
   orig: 177, 123
   offset: 0, 0
   index: -1
 constantine_island_captured
   rotate: false
-  xy: 334, 1
+  xy: 3525, 0
   size: 177, 123
   orig: 177, 123
   offset: 0, 0
   index: -1
 goodricke_island
   rotate: false
-  xy: 847, 1
+  xy: 3702, 0
   size: 170, 126
   orig: 170, 126
   offset: 0, 0
   index: -1
-goodricke_island_capture
+goodricke_island_captured
   rotate: false
-  xy: 1019, 1
+  xy: 3872, 0
   size: 170, 126
   orig: 170, 126
   offset: 0, 0
   index: -1
 ship_up
-  rotate: true
-  xy: 21, 1
-  size: 25, 61
+  rotate: false
+  xy: 4042, 0
+  size: 25, 63
   orig: 25, 63
-  offset: 0, 2
+  offset: 0, 0
   index: -1

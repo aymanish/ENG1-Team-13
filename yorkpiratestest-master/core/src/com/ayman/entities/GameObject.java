@@ -20,8 +20,5 @@ public class GameObject extends Sprite {
     public int width;
     public int height;
 
-    public float[] shapeX;
-    public float[] shapeY;
-
     public boolean max;
 }

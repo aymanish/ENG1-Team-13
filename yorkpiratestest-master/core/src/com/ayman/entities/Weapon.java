@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.MathUtils;
 import java.util.ArrayList;
 
 import static java.lang.Math.abs;
-
+//SHOULD DELETE WEAPON CLASS NO NEED:
 public class Weapon extends GameObject{
     //prolly dont need tile map as it required integer based coordinates
     // for game objects while ours uses floats for precise movement
@@ -39,9 +39,6 @@ public class Weapon extends GameObject{
         max = false;
         acceleration = 200;
         deceleration = 100;
-
-        shapeX = new float[4];
-        shapeY = new float[4];
 
         radians = 3.1415f / 2;
     }

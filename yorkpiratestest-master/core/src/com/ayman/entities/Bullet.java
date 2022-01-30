@@ -13,6 +13,10 @@ public class Bullet extends GameObject {
     public Sprite bulletSprite;
     public Rectangle rectBullet;
 
+    //aymans code:
+    private boolean remove;
+    public boolean BulletCollide;
+
     public Bullet(float x, float y, float radians) {
 
         bulletSprite = textureAtlas.createSprite("bullet");
@@ -25,14 +29,20 @@ public class Bullet extends GameObject {
         this.radians = radians;
 
         //set bullet speed
-        float speed = 100;
+        float speed = 350;
         dx = MathUtils.cos(radians)*speed;
         dy = MathUtils.sin(radians)*speed;
 
         timer = 0;
         timeLimit = 1;
+
+        BulletCollide = false;
     }
 
+    public boolean shouldRemove() {return (remove);}
+
+    /*
+    //won't work since bullet needs to be 'removed' in the update() call:
     public boolean isRemove() {
         if ((timer > timeLimit)) { //add or logical check for bullet overlap with college/other players
             return true;
@@ -41,6 +51,8 @@ public class Bullet extends GameObject {
             return false;
         }
     }
+
+     */
 
     public void update(float dt){
         x += dx * dt;
@@ -53,5 +65,8 @@ public class Bullet extends GameObject {
         rectBullet.y = y;
 
         timer += dt;
+        if (timer > timeLimit) {
+            remove = true;
+        }
     }
 }

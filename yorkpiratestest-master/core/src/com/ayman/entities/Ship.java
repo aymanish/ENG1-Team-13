@@ -14,6 +14,7 @@ public class Ship extends GameObject{
     protected float deceleration;
     public float angle;
     public ArrayList<Bullet> bullets;
+    public boolean isAttacked = false;
 
     public void boundaries() {
         //ship x-axis boundaries:
@@ -24,4 +25,6 @@ public class Ship extends GameObject{
         if(y <= 510) {dy = -3*dy/2;}
         if(y >= 1380) {dy = -3*dy/2;}
     }
+
+
 }
