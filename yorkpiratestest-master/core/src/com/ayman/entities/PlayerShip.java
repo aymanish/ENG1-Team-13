@@ -37,7 +37,6 @@ public class PlayerShip extends Ship{
         height = 64;
 
         maxSpeed = 300;
-        max = false;
         acceleration = 200;
         deceleration = 100;
 
@@ -74,7 +73,6 @@ public class PlayerShip extends Ship{
         //deceleration:
         float vec = (float) Math.sqrt(dx*dx+dy*dy);
         if (vec > 0) {
-            max = true;
             dx -= (dx/vec)*deceleration*dt;
             dy -= (dy/vec)*deceleration*dt;
         }
@@ -85,15 +83,15 @@ public class PlayerShip extends Ship{
             dy = (dy/vec)*maxSpeed;
         }
 
-        //set position:
+        //update position
         x += dx*dt;
         y += dy*dt;
 
-        //set sprite position as well otherwise sprite wont move
+        //set ship position as well otherwise sprite wont move
         sprite.setX(x);
         sprite.setY(y);
 
-        //set rectangle position:
+        //set bounding rectangle position:
         rectPlayer.x = this.x;
         rectPlayer.y = this.y;
 
@@ -109,7 +107,6 @@ public class PlayerShip extends Ship{
     public void shoot() {
         if (bullets.size() < MAX_BULLETS) {
             bullets.add(new Bullet(x, y, this.radians));
-            System.out.println(bullets.size());
         }
     }
 

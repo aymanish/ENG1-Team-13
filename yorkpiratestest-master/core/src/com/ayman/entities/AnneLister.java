@@ -16,6 +16,7 @@ public class AnneLister extends College {
         POINTS = 500;
         //set college sprite
         collegeSprite = textureAtlas.createSprite("anneLister_island");
+        collegeSprite.setPosition(x, y);
         //set bounding rectangle based on college sprite
         boundRect = collegeSprite.getBoundingRectangle();
         boundRect.x = x;

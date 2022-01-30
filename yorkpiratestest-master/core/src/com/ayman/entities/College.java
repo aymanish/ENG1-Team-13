@@ -24,14 +24,10 @@ public class College extends GameObject{
         height = 125;
 
         AOE = new Circle(x,y,400);
-        //AOE.x = this.x - this.width/2f;
-        //AOE.y = this.y - this.height/2f;
-        //AOE.width = this.width*2;
-        //AOE.height = this.height*2;
     }
 
     //college firing system, we will return a sprite bullet when called
-    //public void fire() {
+    //public void shoot() {
         //if (!isCaptured() && playerInRange()) {
             //return bullet with correct direction etc
             //need to implement firing rate somehow possibly in game screen section or

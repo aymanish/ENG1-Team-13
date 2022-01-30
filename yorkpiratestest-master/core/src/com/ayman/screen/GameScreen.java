@@ -1,6 +1,7 @@
 package com.ayman.screen;
 
 import com.ayman.entities.AnneLister;
+import com.ayman.entities.Bullet;
 import com.ayman.game.MyGame;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,6 +15,7 @@ import sun.security.mscapi.CPublicKey;
 
 public class GameScreen extends ScreenAdapter {
     MyGame game;
+    Bullet bul = new Bullet(600, 600, 0);
 
     public GameScreen(MyGame game_instance) {
         this.game = game_instance;
@@ -40,7 +42,6 @@ public class GameScreen extends ScreenAdapter {
         game.map.map.draw(game.batch);
 
         //DRAW PLAYER:
-        game.player.sprite.setPosition(game.player.x, game.player.y);
         game.player.sprite.draw(game.batch);
 
         //player2:
@@ -48,15 +49,12 @@ public class GameScreen extends ScreenAdapter {
         //game.player2.sprite.draw(game.batch);
 
         //college:
-        game.AnneLister.collegeSprite.setPosition(game.AnneLister.x, game.AnneLister.y);
         game.AnneLister.collegeSprite.draw(game.batch);
-        //game.batch.draw(game.AnneLister.AOE, game.AnneLister.AOE.x, game.AnneLister.AOE.y);
 
         //game.player.boundary.draw(game.batch);
         //player3:
         //game.player3.sprite.setPosition(game.player.x, game.player.y);
         //game.player3.sprite.draw(game.batch);
-
         game.font.draw(game.batch, "\nx: "+ game.player.x+"    y: "+game.player.y+" \n   shipAngle: "+game.player.angle+" \n shipR: "+game.player.radians +" \n DX: "+game.player.dx + " DY: "+game.player.dy , 700, 700); //Gdx.graphics.getWidth() * .15f
         game.font.draw(game.batch, "\nHP: " + game.player.HP + "\nP: " + game.player.POINTS, game.player.x+game.player.width, game.player.y+game.player.height);
         game.font.draw(game.batch, "\nHP: " + game.AnneLister.HP + "\nP: " + game.AnneLister.POINTS+ "\nC: " + game.AnneLister.isCaptured(), game.AnneLister.x+game.AnneLister.width, game.AnneLister.y+game.AnneLister.height);
@@ -65,6 +63,7 @@ public class GameScreen extends ScreenAdapter {
         for (int i = 0; i < game.player.bullets.size(); i++) {
             game.player.bullets.get(i).bulletSprite.draw(game.batch);
         }
+
         //remove bullets
         //game.player.removeBullets();
 
