@@ -34,7 +34,7 @@ public class Bullet extends GameObject {
         dy = MathUtils.sin(radians)*speed;
 
         timer = 0;
-        timeLimit = 1;
+        timeLimit = 2;
 
         BulletCollide = false;
     }

@@ -15,7 +15,10 @@ import sun.security.mscapi.CPublicKey;
 
 public class GameScreen extends ScreenAdapter {
     MyGame game;
-    Bullet bul = new Bullet(600, 600, 0);
+    //Bullet bul = new Bullet(600, 600, 0);
+    public Vector2 bulletDirection;
+    public float bulletRadians;
+
 
     public GameScreen(MyGame game_instance) {
         this.game = game_instance;
@@ -30,6 +33,8 @@ public class GameScreen extends ScreenAdapter {
 
         //move player sprite based on input
         game.player.update(delta);
+
+
 
 
         //ayman's code:
@@ -99,7 +104,7 @@ public class GameScreen extends ScreenAdapter {
         //GAME STATS:
         game.font.draw(game.batch, "\nx: "+ game.player.x+"    y: "+game.player.y+" \n   shipAngle: "+game.player.angle+" \n shipR: "+game.player.radians +" \n DX: "+game.player.dx + " DY: "+game.player.dy , 700, 700);
         game.font.draw(game.batch, "\nHP: " + game.player.HP + "\nP: " + game.player.POINTS+ "\nAMMO: " + game.player.bullets.size() + "\nSCREENX: " + Gdx.graphics.getWidth(), game.player.x+game.player.width, game.player.y+game.player.height);
-        game.font.draw(game.batch, "\nHP: " + game.AnneLister.HP + "\nP: " + game.AnneLister.POINTS+ "\nC: " + game.AnneLister.isCaptured+ "\nAOE: " + game.AnneLister.isAOE+ "\nAMMO: " + game.AnneLister.bullets.size()+"\nAOEXY: " + game.AnneLister.AOE.x+ " " + game.AnneLister.AOE.y+"\nXY: " + game.AnneLister.x+ " " + game.AnneLister.y, game.AnneLister.x+game.AnneLister.width, game.AnneLister.y+game.AnneLister.height);
+        game.font.draw(game.batch, "\nHP: " + game.AnneLister.HP + "\nP: " + game.AnneLister.POINTS+ "\nC: " + game.AnneLister.isCaptured+ "\nAOE: " + game.AnneLister.isAOE+ "\nAMMO: " + game.AnneLister.bullets.size()+"\nAOEXY: " + game.AnneLister.AOE.x+ " " + game.AnneLister.AOE.y+"\nXY: " + game.AnneLister.x+ " " + game.AnneLister.y+"\nangle: " + game.AnneLister.bulletradians, game.AnneLister.x+game.AnneLister.width, game.AnneLister.y+game.AnneLister.height);
 
         //draw bullets
         for (int i = 0; i < game.player.bullets.size(); i++) {
@@ -132,12 +137,16 @@ public class GameScreen extends ScreenAdapter {
         }
         */
 
+        //update college bullet angle before PLAYER IN RANGE below:
+        bulletDirection = new Vector2(game.AnneLister.x-game.player.x, game.AnneLister.y-game.player.y).nor();
+        bulletRadians = bulletDirection.angleRad() + 10213.2f;
+
         //PLAYER IN RANGE:
         if (Intersector.overlaps(game.AnneLister.AOE, game.player.rectPlayer)) {
             game.AnneLister.isAOE = true;
             System.out.println("AOE Hit");
             if (!(game.AnneLister.isCaptured)) {
-                game.AnneLister.shoot();
+                game.AnneLister.shoot(bulletRadians);
             }
         } else {
             game.AnneLister.isAOE = false;

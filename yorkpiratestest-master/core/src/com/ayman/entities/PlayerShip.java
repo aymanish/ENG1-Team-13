@@ -42,7 +42,7 @@ public class PlayerShip extends Ship{
         acceleration = 200;
         deceleration = 100;
 
-        radians = 3.1415f / 2;
+        radians = (3.1415f / 2); // - 1.5708f
         rotationSpeed = 3;
 
     }
@@ -59,7 +59,7 @@ public class PlayerShip extends Ship{
         }
 
         //rotate sprite based on rads:
-        angle = (MathUtils.radiansToDegrees * radians) - 90;
+        angle = (MathUtils.radiansToDegrees * radians) -90; //-90
         if(angle != 0){
             angle = angle % 360;
         }
