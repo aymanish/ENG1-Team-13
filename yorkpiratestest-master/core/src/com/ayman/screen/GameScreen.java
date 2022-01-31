@@ -16,8 +16,7 @@ import sun.security.mscapi.CPublicKey;
 public class GameScreen extends ScreenAdapter {
     MyGame game;
     //Bullet bul = new Bullet(600, 600, 0);
-    public Vector2 bulletDirection;
-    public float bulletRadians;
+
 
 
     public GameScreen(MyGame game_instance) {
@@ -36,14 +35,12 @@ public class GameScreen extends ScreenAdapter {
         //move player sprite based on input
         game.player.update(delta);
 
-
-
-
         //ayman's code:
         //UPDATE PLAYER BULLETS:
         for (int i = 0; i < game.player.bullets.size(); i++) {
 
             game.player.bullets.get(i).update(delta);
+            //COLLEGE FOR LOOP FUNCTION:
             if (game.player.bullets.get(i).rectBullet.overlaps(game.AnneLister.boundRect)) {
                 //game.player.bullets.get(i).BulletCollide = true;
                 game.AnneLister.isAttacked = true;
@@ -79,13 +76,14 @@ public class GameScreen extends ScreenAdapter {
         //camera follows player after player sprite moves (player.update called)
         game.camera.position.set(game.player.x, game.player.y, 0);
         //ensures camera maintains aspect ratio of screen:
-        game.camera.viewportWidth = Gdx.graphics.getWidth();
-        game.camera.viewportHeight = Gdx.graphics.getHeight();
+        game.camera.viewportWidth = Gdx.graphics.getWidth()/2;
+        game.camera.viewportHeight = Gdx.graphics.getHeight()/2;
         game.camera.update();
 
         //begin rendering batch
         game.batch.begin();
 
+        /*
         //DRAW MAP
         game.map.map.draw(game.batch);
 
@@ -96,29 +94,64 @@ public class GameScreen extends ScreenAdapter {
         //game.player2.sprite.setPosition(game.player2.x, game.player2.y);
         //game.player2.sprite.draw(game.batch);
 
+
         //college:
         //Line below is important to render any change in college sprite:
         game.AnneLister.collegeSprite.setPosition(game.AnneLister.x, game.AnneLister.y);
         game.AnneLister.collegeSprite.draw(game.batch);
+        game.Constantine.collegeSprite.setPosition(game.Constantine.x, game.Constantine.y);
+        game.Constantine.collegeSprite.draw(game.batch);
+        game.Goodricke.collegeSprite.setPosition(game.Goodricke.x, game.Goodricke.y);
+        game.Goodricke.collegeSprite.draw(game.batch);
+
+         */
+
+        game.drawMap();
+        game.drawPlayer();
+        game.drawColleges();
+
+        //DRAW GAME SPRITE SEPERATELY FOR NOW
+        game.AnneLister.NPCs.get(0).npcSprite.setPosition(game.AnneLister.NPCs.get(0).x-50, game.AnneLister.NPCs.get(0).y);
+        game.AnneLister.NPCs.get(0).npcSprite.draw(game.batch);
+
+        //NPCs:
+        for (int i = 0; i <game.AnneLister.npcCount; i++) {
+            game.AnneLister.NPCs.get(i).npcSprite.setPosition(game.AnneLister.NPCs.get(i).x, game.AnneLister.NPCs.get(i).y);
+            game.AnneLister.NPCs.get(i).npcSprite.draw(game.batch);
+            game.Constantine.NPCs.get(i).npcSprite.setPosition(game.Constantine.NPCs.get(i).x, game.Constantine.NPCs.get(i).y);
+            game.Constantine.NPCs.get(i).npcSprite.draw(game.batch);
+            game.Goodricke.NPCs.get(i).npcSprite.setPosition(game.Goodricke.NPCs.get(i).x, game.Goodricke.NPCs.get(i).y);
+            game.Goodricke.NPCs.get(i).npcSprite.draw(game.batch);
+        }
+
         //game.batch.draw(game.AnneLister.AOE, game.AnneLister.collegeAOE.x, game.AnneLister.collegeAOE.y);
 
 
         //GAME STATS:
         game.font.draw(game.batch, "\nx: "+ game.player.x+"    y: "+game.player.y+" \n   shipAngle: "+game.player.angle+" \n shipR: "+game.player.radians +" \n DX: "+game.player.dx + " DY: "+game.player.dy , 700, 700);
         game.font.draw(game.batch, "\nHP: " + game.player.HP + "\nP: " + game.player.POINTS+ "\nAMMO: " + game.player.bullets.size() + "\nSCREENX: " + Gdx.graphics.getWidth(), game.player.x+game.player.width, game.player.y+game.player.height);
-        game.font.draw(game.batch, "\nHP: " + game.AnneLister.HP + "\nP: " + game.AnneLister.POINTS+ "\nC: " + game.AnneLister.isCaptured+ "\nAOE: " + game.AnneLister.isAOE+ "\nAMMO: " + game.AnneLister.bullets.size()+"\nAOEXY: " + game.AnneLister.AOE.x+ " " + game.AnneLister.AOE.y+"\nXY: " + game.AnneLister.x+ " " + game.AnneLister.y+"\nangle: " + game.AnneLister.bulletradians, game.AnneLister.x+game.AnneLister.width, game.AnneLister.y+game.AnneLister.height);
+        //stat for each college
+        game.font.draw(game.batch, "\nAOEX: "+ game.Constantine.AOE.x, 800, 800);
 
+        /*
         //draw bullets
         for (int i = 0; i < game.player.bullets.size(); i++) {
             game.player.bullets.get(i).bulletSprite.draw(game.batch);
             System.out.println("BULLET DRAWN");
         }
 
-        //DRAW COLLEGE BULLETS:
+         //DRAW COLLEGE BULLETS:
         for (int i = 0; i < game.AnneLister.bullets.size(); i++) {
             game.AnneLister.bullets.get(i).bulletSprite.draw(game.batch);
             System.out.println("COLLEGE BULLET DRAWN");
         }
+
+        */
+
+        game.drawPlayerBullets();
+        game.drawCollegeBullets();
+
+
 
         //remove bullets
         //game.player.removeBullets();
@@ -139,11 +172,16 @@ public class GameScreen extends ScreenAdapter {
         }
         */
 
-        //update college bullet angle before PLAYER IN RANGE below:
-        bulletDirection = new Vector2(game.AnneLister.x-game.player.x, game.AnneLister.y-game.player.y).nor();
-        bulletRadians = bulletDirection.angleRad() + 10213.2f;
+        ///////////////////GAME LOGIC//////////////////////////////////////////////////////////////////////
 
-        //PLAYER IN RANGE:
+
+        /*
+        //update college bullet angle before PLAYER IN RANGE below:
+        //bulletDirection = new Vector2(game.AnneLister.x-game.player.x, game.AnneLister.y-game.player.y).nor();
+        //bulletRadians = bulletDirection.angleRad() + 10213.2f;
+
+        //PLAYER IN RANGE (IMPLEMENT FOR LOOP ON COLLEGE LIST FOR ALL BELOW):
+
         if (Intersector.overlaps(game.AnneLister.AOE, game.player.rectPlayer)) {
             game.AnneLister.isAOE = true;
             System.out.println("AOE Hit");
@@ -154,6 +192,10 @@ public class GameScreen extends ScreenAdapter {
             game.AnneLister.isAOE = false;
         }
 
+         */
+        game.playerInRange();
+
+/*
         //BULLET COLLEGE COLLISION:
         if (game.AnneLister.isAttacked) {
             if (!(game.AnneLister.isCaptured)) {
@@ -162,6 +204,9 @@ public class GameScreen extends ScreenAdapter {
             game.AnneLister.isAttacked = false;
         }
 
+ */
+        game.bulletCollegeHit();
+/*
         //PLAYER BULLET COLLISION:
         if (game.player.isAttacked) {
             game.player.playerHit();
@@ -175,6 +220,10 @@ public class GameScreen extends ScreenAdapter {
             game.player.dy = -3*game.player.dy/2;
         }
 
+ */
+        game.playerBulletHit();
+        game.playerCollegeHit();
+
         //PLAYER DEAD:
         if (game.player.isDead()) {
             System.out.println("DEAD");
@@ -186,7 +235,7 @@ public class GameScreen extends ScreenAdapter {
             //game.player.dy = 0;
             game.setScreen(new EndScreen(game));
         }
-
+/*
         //COLLEGE CAPTURED:
         //AnneLister captured:
         if ((!game.AnneLister.isCaptured) && game.AnneLister.HP == 0) {
@@ -197,6 +246,9 @@ public class GameScreen extends ScreenAdapter {
             game.AnneLister.HP = 10;
             game.player.POINTS += game.AnneLister.POINTS;
         }
+
+ */
+        game.collegeCaptured();
 
 
     }

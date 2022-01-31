@@ -36,6 +36,7 @@ public class npcShip extends Ship{
     public void update(float dt) {
 
         //insert any positional updates
+        //can use the college bullet aim to update radians
 
         boundaries();
     }

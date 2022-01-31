@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class College extends GameObject{
 
     public Circle AOE;
-    public float bulletradians, bulletX, bulletY; //= 3.1415f/2
+    //public float bulletradians, bulletX, bulletY; //= 3.1415f/2
     public int HP, POINTS;
     public Sprite collegeSprite;
     public Rectangle boundRect;
@@ -22,24 +22,18 @@ public class College extends GameObject{
     //aymans addition:
     public boolean isAttacked;
     public boolean isAOE;
-    private final int MAX_COLLEGE_BULLETS = 4;
+    private final int MAX_COLLEGE_BULLETS = 1;
     public boolean isCaptured;
 
-
-    //double diffX, diffY = 600;
-
-
-
+    public int npcCount = 3;
+    public ArrayList<npcShip> NPCs;
+    //call generateNPC() function:
 
 
     public College() {
 
         this.bullets = new ArrayList<Bullet>();
-
-        //bulletradians = (float) Math.atan2(diffY,diffX);
-
-
-
+        this.NPCs = new ArrayList<npcShip>();
 
 
         width = 174;
@@ -61,6 +55,22 @@ public class College extends GameObject{
             bullets.add(new Bullet(x + width/2f, y + height/2f, radians));
         }
     }
+
+    //GENERATE NPCS:
+    public void generateNPC (npcShip NPC) {
+        for (int i = 0; i < npcCount; i++) {
+            NPCs.add(NPC);
+        }
+    }
+
+    public void spreadNPC () {
+        for (int i = 0; i < npcCount; i++) {
+            NPCs.get(i).y = y-100;
+        }
+        NPCs.get(0).x = x + 50;
+        NPCs.get(1).x = x + 100;
+        NPCs.get(2).x = x + 150;
+    }
         //if (!isCaptured() && playerInRange()) {
             //return bullet with correct direction etc
             //need to implement firing rate somehow possibly in game screen section or
@@ -81,11 +91,14 @@ public class College extends GameObject{
     public void collegeHit() {
         if (!isCaptured) {
             HP--;
+            System.out.println("COLLEGE HIT");
             isAttacked = false;
         }
 
         //players point gains in fireSuccess() method in PlayerShip class
     }
+
+
     /*
     //checks if college has been captured
     public boolean isCaptured() {
@@ -96,7 +109,6 @@ public class College extends GameObject{
             return false;
         }
     }
-
      */
 
 

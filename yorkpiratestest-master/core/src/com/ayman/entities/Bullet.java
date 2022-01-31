@@ -69,4 +69,6 @@ public class Bullet extends GameObject {
             remove = true;
         }
     }
+
+    //piblic void draw(ShapeRendered sr)
 }
