@@ -55,18 +55,9 @@ public class MyGame extends Game {
 		Constantine = new Constantine();
 		Goodricke = new Goodricke();
 
-		//initialize NPC:
-		shipAL = new npcShip("ship_AL");
-		shipCT = new npcShip("ship_CT");
-		shipGR = new npcShip("ship_GR");
-
-		AnneLister.generateNPC(shipAL);
-		Constantine.generateNPC(shipCT);
-		Goodricke.generateNPC(shipGR);
-
-		AnneLister.spreadNPC();
-		Constantine.spreadNPC();
-		Goodricke.spreadNPC();
+		//AnneLister.spreadNPC();
+		//Constantine.spreadNPC();
+		//Goodricke.spreadNPC();
 
 		//initialize list of colleges
 		collegeList = new ArrayList<>();
@@ -74,24 +65,28 @@ public class MyGame extends Game {
 		collegeList.add(Goodricke);
 		collegeList.add(Constantine);
 
+		//initialize NPC:
+		for (College college : collegeList) {
+			for (int i = 0; i < college.npcCount; i++) {
+				college.NPCs.add(new npcShip(college.png_npc));
+				college.NPCs.get(i).x = college.x + (i*50) + 50;
+				college.NPCs.get(i).y = college.y - 100;
+			}
+		}
+
 
 		//set screen to title screen always upon startup:
 		setScreen(new TitleScreen(this));
 	}
 
-	public void drawMap() {
-		map.map.draw(batch);
+	public void drawMap() {map.map.draw(batch);
 	}
 
-	public void drawPlayer() {
-		player.sprite.draw(batch);
+	public void drawPlayer() {player.sprite.draw(batch);
 	}
-
-
 
 	public void drawColleges() {
 		for (College college: collegeList) {
-			college.collegeSprite.setPosition(college.x, college.y);
 			college.collegeSprite.draw(batch);
 		}
 	}
@@ -99,7 +94,6 @@ public class MyGame extends Game {
 	public void drawPlayerBullets() {
 		for (int i = 0; i < player.bullets.size(); i++) {
 			player.bullets.get(i).bulletSprite.draw(batch);
-			System.out.println("BULLET DRAWN");
 		}
 	}
 
@@ -107,7 +101,6 @@ public class MyGame extends Game {
 		for (College college: collegeList) {
 			for (int i = 0; i < college.bullets.size(); i++) {
 				college.bullets.get(i).bulletSprite.draw(batch);
-				System.out.println("COLLEGE BULLET DRAWN");
 			}
 		}
 	}
@@ -174,8 +167,7 @@ public class MyGame extends Game {
 				} else {
 					college.collegeSprite = college.textureAtlas.createSprite("constantine_island_captured");
 				}
-				college.HP = 10;
-				college.POINTS += player.POINTS;
+				player.POINTS += college.POINTS;
 			}
 		}
 	}

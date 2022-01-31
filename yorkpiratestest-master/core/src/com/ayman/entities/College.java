@@ -18,6 +18,8 @@ public class College extends GameObject{
     public Sprite collegeSprite;
     public Rectangle boundRect;
     public ArrayList<Bullet> bullets;
+    public ArrayList<npcShip> NPCs;
+    public String png_npc;
 
     //aymans addition:
     public boolean isAttacked;
@@ -26,7 +28,6 @@ public class College extends GameObject{
     public boolean isCaptured;
 
     public int npcCount = 3;
-    public ArrayList<npcShip> NPCs;
     //call generateNPC() function:
 
 
@@ -35,11 +36,9 @@ public class College extends GameObject{
         this.bullets = new ArrayList<Bullet>();
         this.NPCs = new ArrayList<npcShip>();
 
-
         width = 174;
         height = 125;
 
-        //what value are these x and y?
         AOE = new Circle(x,y,250);
 
         isAttacked = false;
@@ -56,21 +55,6 @@ public class College extends GameObject{
         }
     }
 
-    //GENERATE NPCS:
-    public void generateNPC (npcShip NPC) {
-        for (int i = 0; i < npcCount; i++) {
-            NPCs.add(NPC);
-        }
-    }
-
-    public void spreadNPC () {
-        for (int i = 0; i < npcCount; i++) {
-            NPCs.get(i).y = y-100;
-        }
-        NPCs.get(0).x = x + 50;
-        NPCs.get(1).x = x + 100;
-        NPCs.get(2).x = x + 150;
-    }
         //if (!isCaptured() && playerInRange()) {
             //return bullet with correct direction etc
             //need to implement firing rate somehow possibly in game screen section or

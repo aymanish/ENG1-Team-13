@@ -11,13 +11,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
-import sun.security.mscapi.CPublicKey;
 
 public class GameScreen extends ScreenAdapter {
     MyGame game;
-    //Bullet bul = new Bullet(600, 600, 0);
-
-
 
     public GameScreen(MyGame game_instance) {
         this.game = game_instance;
@@ -26,8 +22,6 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0.6f, 1);
-
-
 
         //important camera stuff (not sure what this does tho)
         game.batch.setProjectionMatrix(game.camera.combined);

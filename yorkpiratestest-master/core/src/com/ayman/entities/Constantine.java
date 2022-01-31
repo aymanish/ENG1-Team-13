@@ -6,7 +6,11 @@ public class Constantine extends College {
         y = 900;
         HP = 5;
         POINTS = 500;
+        //set college sprite
+        png_npc = "ship_CT";
         collegeSprite = textureAtlas.createSprite("constantine_island");
+        collegeSprite.setPosition(x, y);
+        //set bounding rectangle based on college sprite
         boundRect = collegeSprite.getBoundingRectangle();
         boundRect.x = x;
         boundRect.y = y;
