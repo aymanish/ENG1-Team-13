@@ -176,13 +176,13 @@ public class GameScreen extends ScreenAdapter {
         //PLAYER DEAD:
         if (game.player.isDead()) {
             System.out.println("DEAD");
-            //call game function to restart game (maybe do at end screen)
-            game.player.x= 600;
-            game.player.y = 600;
-            game.player.HP = 10;
-            game.player.dx = 0;
-            game.player.dy = 0;
-            //game.setScreen(new EndScreen(game));
+            //called game function to restart game at end screen)
+            //game.player.x= 600;
+            //game.player.y = 600;
+            //game.player.HP = 10;
+            //game.player.dx = 0;
+            //game.player.dy = 0;
+            game.setScreen(new EndScreen(game));
         }
 
         //COLLEGE CAPTURED:

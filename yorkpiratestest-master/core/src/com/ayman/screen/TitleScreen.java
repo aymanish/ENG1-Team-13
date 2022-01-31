@@ -36,9 +36,9 @@ public class TitleScreen extends ScreenAdapter{
         //game.camera.update();
         //game.batch.setProjectionMatrix(game.camera.combined);
         game.batch.begin();
-        game.font.draw(game.batch, "Title Screen!", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .75f);
-        game.font.draw(game.batch, "Collect treasure to win!.", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .5f);
-        game.font.draw(game.batch, "Press space to play.", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .25f);
+        //game.font.draw(game.batch, "Title Screen!", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .75f);
+        //game.font.draw(game.batch, "Collect treasure to win!.", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .5f);
+        game.font.draw(game.batch, "Welcome to YORK PIRATES! \nDefeat all colleges to win! \nPress space to play.", game.player.x, game.player.y);
         game.batch.end();
     }
 
