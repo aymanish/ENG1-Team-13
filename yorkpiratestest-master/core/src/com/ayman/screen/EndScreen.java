@@ -24,6 +24,9 @@ public class EndScreen extends ScreenAdapter {
 
                 if (keyCode == Input.Keys.ENTER) {
                     game.setScreen(new TitleScreen(game));
+                    //RESET GAME:
+                    game.create();
+                    System.out.println("NEW GAME CREATED");
                 }
 
                 return true;
@@ -41,9 +44,7 @@ public class EndScreen extends ScreenAdapter {
         game.font.draw(game.batch, "You win! \nPoints: "+game.player.POINTS+" \nPress enter to restart.", game.player.x, game.player.y);//Gdx.graphics.getHeight() * .25f
         game.batch.end();
 
-        //RESET GAME:
-        game.create();
-        System.out.println("NEW GAME CREATED");
+
 
     }
 

@@ -28,6 +28,8 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0.6f, 1);
 
+
+
         //important camera stuff (not sure what this does tho)
         game.batch.setProjectionMatrix(game.camera.combined);
 
