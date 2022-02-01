@@ -1,2 +1,0 @@
-com/ayman/game/desktop/DesktopLauncher.java
- com.ayman.game.desktop.DesktopLauncher
