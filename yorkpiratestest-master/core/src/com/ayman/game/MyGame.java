@@ -87,7 +87,7 @@ public class MyGame extends Game {
 		for (College college: collegeList) {
 			for (int i = 0; i < player.bullets.size(); i++) {
 				player.bullets.get(i).update(delta);
-				if (player.bullets.get(i).bulletHit) {
+				if (player.bullets.get(i).bulletHit || player.bullets.get(i).timeCheck()) {
 					player.bullets.remove(i);
 					i--;
 				}
@@ -99,7 +99,7 @@ public class MyGame extends Game {
 		for (College college: collegeList) {
 			for (int i = 0; i < college.bullets.size(); i++) {
 				college.bullets.get(i).update(delta);
-				if (college.bullets.get(i).bulletHit) {
+				if (college.bullets.get(i).bulletHit || college.bullets.get(i).timeCheck()) {
 					college.bullets.remove(i);
 					i--;
 				}

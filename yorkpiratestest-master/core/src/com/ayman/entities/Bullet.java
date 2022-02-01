@@ -15,7 +15,7 @@ public class Bullet extends GameObject {
 
     //aymans code:
     public boolean bulletHit;
-    private boolean remove;
+
 
     public Bullet(float x, float y, float radians) {
 
@@ -39,7 +39,15 @@ public class Bullet extends GameObject {
         bulletHit = false;
     }
 
-    public boolean shouldRemove() {return (remove);}
+    //public boolean shouldRemove() {return (remove);}
+
+    public boolean timeCheck() {
+        if (timer > timeLimit) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
     public void update(float dt){
@@ -53,9 +61,6 @@ public class Bullet extends GameObject {
         rectBullet.y = y;
 
         timer += dt;
-        if (timer > timeLimit) {
-            remove = true;
-        }
     }
 
     //public void draw(ShapeRenderer sr)
