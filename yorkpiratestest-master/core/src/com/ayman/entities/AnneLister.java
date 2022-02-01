@@ -1,5 +1,7 @@
 package com.ayman.entities;
 
+import java.awt.*;
+
 public class AnneLister extends College {
     public AnneLister() {
         x = 900; //800/2
@@ -8,8 +10,11 @@ public class AnneLister extends College {
         POINTS = 500;
         //set college sprite
         png_npc = "ship_AL";
+        png_captured = "anneLister_island_captured";
+        capturedSprite = textureAtlas.createSprite(png_captured);
         collegeSprite = textureAtlas.createSprite("anneLister_island");
         collegeSprite.setPosition(x, y);
+        capturedSprite.setPosition(x, y);
         //set bounding rectangle based on college sprite
         boundRect = collegeSprite.getBoundingRectangle();
         boundRect.x = x;

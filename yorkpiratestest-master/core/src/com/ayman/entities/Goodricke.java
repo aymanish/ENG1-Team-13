@@ -8,8 +8,11 @@ public class Goodricke extends College {
         POINTS = 500;
         //set college sprite
         png_npc = "ship_GR";
+        png_captured = "goodricke_island_captured";
+        capturedSprite = textureAtlas.createSprite(png_captured);
         collegeSprite = textureAtlas.createSprite("goodricke_island");
         collegeSprite.setPosition(x, y);
+        capturedSprite.setPosition(x, y);
         //set bounding rectangle based on college sprite
         boundRect = collegeSprite.getBoundingRectangle();
         boundRect.x = x;

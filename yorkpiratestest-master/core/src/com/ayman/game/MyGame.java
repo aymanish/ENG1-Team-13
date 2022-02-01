@@ -23,7 +23,6 @@ public class MyGame extends Game {
 	public College AnneLister, Constantine, Goodricke;
 	private ArrayList<College> collegeList = new ArrayList<>();
 	public ArrayList<Bullet> bullets;
-	public npcShip shipAL, shipGR, shipCT;
 
 	//COLLEGE AIM:
 	public Vector2 bulletDirection;
@@ -51,16 +50,10 @@ public class MyGame extends Game {
 		bullets = new ArrayList<Bullet>();
 		player = new PlayerShip(bullets);
 
-		//initialize npc ships
-
 		//initialize colleges;
 		AnneLister = new AnneLister();
 		Constantine = new Constantine();
 		Goodricke = new Goodricke();
-
-		//AnneLister.spreadNPC();
-		//Constantine.spreadNPC();
-		//Goodricke.spreadNPC();
 
 		//initialize list of colleges
 		collegeList = new ArrayList<>();
@@ -82,43 +75,26 @@ public class MyGame extends Game {
 		setScreen(new TitleScreen(this));
 	}
 
-
+	//TODO
 	public void updatePlayerBullets(float delta) {
-		//UPDATE PLAYER BULLETS:
 		for (College college: collegeList) {
 			for (int i = 0; i < player.bullets.size(); i++) {
 				player.bullets.get(i).update(delta);
-				//System.out.println("BULLET SHOT");
-				//COLLEGE FOR LOOP FUNCTION:
-				//for (College college: collegeList) {
-				if (player.bullets.get(i).rectBullet.overlaps(college.boundRect)) {
-					//game.player.bullets.get(i).BulletCollide = true;
-					college.isAttacked = true;
-					System.out.println("BULLET COLLIDE");
-				}
-				if ((player.bullets.get(i).shouldRemove())||(college.isAttacked)) {
+				if (player.bullets.get(i).bulletHit) {
 					player.bullets.remove(i);
 					i--;
-					System.out.println("BULLET REMOVED");
 				}
 			}
 		}
 	}
-
+	//TODO
 	public void updateCollegeBullets(float delta) {
 		for (College college: collegeList) {
-			//UPDATE COLLEGE BULLETS:
 			for (int i = 0; i < college.bullets.size(); i++) {
 				college.bullets.get(i).update(delta);
-				if (college.bullets.get(i).rectBullet.overlaps(player.rectPlayer)) {
-					//game.player.bullets.get(i).BulletCollide = true;
-					player.isAttacked = true;
-					System.out.println("PLAYER BULLET COLLIDE");
-				}
-				if ((college.bullets.get(i).shouldRemove())||(player.isAttacked)) {
+				if (college.bullets.get(i).bulletHit) {
 					college.bullets.remove(i);
 					i--;
-					System.out.println("PLAYER BULLET REMOVED");
 				}
 			}
 		}
@@ -132,15 +108,21 @@ public class MyGame extends Game {
 
 	public void drawColleges() {
 		for (College college: collegeList) {
-			college.collegeSprite.setPosition(college.x, college.y);
-			college.collegeSprite.draw(batch);
+			if (college.isCaptured()) {
+				college.capturedSprite.draw(batch);
+			} else {
+				//college.collegeSprite.setPosition(college.x,college.y);
+				college.collegeSprite.draw(batch);
+			}
 		}
 	}
 
 	public void drawCollegeStats() {
 		for (College college: collegeList) {
 			//stat for each college
-			font.draw(batch, "\nHP: " + college.HP + "\nP: " + college.POINTS+ "\nAMMO: " + college.bullets.size() + "\nC: " + college.isCaptured+ "\nA: " + college.isAttacked+ "\nAOE: " + college.isAOE, college.x+college.width, college.y+college.height);
+			font.draw(batch, "\nHP: " + college.HP + "\nP: " + college.POINTS+ "\nAMMO: "
+					+ college.bullets.size() + "\nC: " + college.isCaptured(),
+					college.x+college.width, college.y+college.height);
 		}
 	}
 
@@ -164,96 +146,79 @@ public class MyGame extends Game {
 	//Capture Boss college: x / 1
 	//Move with player
 
+	public void drawObjectives() {
+		font.draw(batch, "\nOBJECTIVES: \nCapture 2 colleges: " + player.captures + "/2" , player.x-500, player.y+270);
+		if (isBossUnlocked()) {
+			if (!playerWin()) {
+				font.draw(batch, "\n\n\nCapture Boss college: 0/1" , player.x-500, player.y+270);
+			} else {
+				font.draw(batch, "\n\n\nCapture Boss college: 1/1" , player.x-500, player.y+270);
+			}
+		}
+	}
+
+	//college check if player is in range and shoots if so
 	public void playerInRange() {
 		for (College college: collegeList) {
 			//bullet radian was here initially:
 			if (Intersector.overlaps(college.AOE, player.rectPlayer)) {
-				college.isAOE = true;
-				System.out.println("AOE Hit");
-				if (!(college.isCaptured)) {
-					bulletDirection = new Vector2(college.x-player.x, college.y-player.y).nor();
-					bulletRadians = bulletDirection.angleRad() + 10213.2f;
-					college.shoot(bulletRadians);
-					System.out.println("AOE Hit");
+				if (!(college.isCaptured())) {
+					college.shoot(college.shootDirection(player.x,player.y));
 				}
-			} else {
-				college.isAOE = false;
 			}
 		}
 	}
 
+	//if player bullet hits college then college is attacked, if college captured then hit is registered but no damage dealt
 	public void bulletCollegeHit() {
 		for (College college: collegeList) {
-			if (college.isAttacked) {
-				if (!(college.isCaptured)) {
-					college.collegeHit();
+			for (Bullet bullet : player.bullets) {
+				if (college.boundRect.overlaps(bullet.rectBullet)) {
+					if (!college.isCaptured()) {
+						college.collegeHit();
+						if (college.isCaptured()) {
+							player.POINTS += college.POINTS;
+							player.captures++;
+						}
+					} bullet.bulletHit = true;
 				}
-				college.isAttacked = false;
 			}
 		}
 	}
 
+	//checks if a bullet from a college hits a player, if so damage is dealt to player and hit is registered
 	public void playerBulletHit() {
-		if (player.isAttacked) {
-			player.playerHit();
+		for (College college: collegeList) {
+			for (Bullet bullet : college.bullets) {
+				if (player.rectPlayer.overlaps(bullet.rectBullet)) {
+					player.playerHit();
+					bullet.bulletHit = true;
+				}
+			}
 		}
 	}
 
+	//checks if player collides with college, collision physics if so
 	public void playerCollegeHit() {
 		for (College college: collegeList) {
-			//PLAYER-COLLEGE COLLISION
 			if (player.rectPlayer.overlaps(college.boundRect)) {
-				System.out.println("College Hit");
-				//collision:
 				player.dx = -3*player.dx/2;
 				player.dy = -3*player.dy/2;
 			}
 		}
 	}
-
-
-	//ayman modified this with player.captures in last line
+	/* method now redundant due to refactoring
 	public void collegeCaptured() {
 		for (College college: collegeList) {
 			//COLLEGE CAPTURED:
-			if ((!college.isCaptured) && college.HP == 0) {
-				System.out.println("CAPTURED");
-				college.isCaptured = true;
-				//IF STATEMENT FOR EACH COLLEGE:
-				if (college.x == 900) {
-					college.collegeSprite = college.textureAtlas.createSprite("anneLister_island_captured");
-				} else if (college.x == 1600) {
-					college.collegeSprite = college.textureAtlas.createSprite("goodricke_island_captured");
-				} else if (college.x == 2000) {
-					college.collegeSprite = college.textureAtlas.createSprite("constantine_island_captured");
-				}
-				college.HP = 5;
+			if (college.isCaptured() && !college.captured) {
 				player.POINTS += college.POINTS;
-				player.captures += 1;
+				player.captures++;
+				college.captured = true;
 			}
 		}
-	}
-	/*
-	public void collegeCaptured() {
-		for (College college: collegeList) {
-			//COLLEGE CAPTURED:
-			if ((!college.isCaptured) && college.HP == 0) {
-				System.out.println("CAPTURED");
-				college.isCaptured = true;
-				//IF STATEMENT FOR EACH COLLEGE:
-				if (college.x == 900) {
-					college.collegeSprite = college.textureAtlas.createSprite("anneLister_island_captured");
-				} else if (college.x == 1600) {
-					college.collegeSprite = college.textureAtlas.createSprite("goodricke_island_captured");
-				} else if (college.x == 2000) {
-					college.collegeSprite = college.textureAtlas.createSprite("constantine_island_captured");
-				}
-				player.POINTS += college.POINTS;
-			}
-		}
-	}
+	}*/
 
-	 */
 
 	//boolean checks for ending game + unlocking boss:
 	public boolean isGameEnd() {
@@ -278,7 +243,7 @@ public class MyGame extends Game {
 	}
 
 	public boolean isBossUnlocked() {
-		return player.captures == 2;
+		return player.captures == collegeList.size()-1;
 	}
 
 

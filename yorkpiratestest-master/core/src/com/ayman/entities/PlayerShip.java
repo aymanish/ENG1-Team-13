@@ -24,6 +24,7 @@ public class PlayerShip extends Ship{
 
     //ayman's code:
     public int captures = 0;
+    public int captureScore = 1;
 
     public PlayerShip(ArrayList<Bullet> bullets) {
 
@@ -101,7 +102,6 @@ public class PlayerShip extends Ship{
 
         //bullet fire
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            System.out.println("PLAYER SHOOTING");
             shoot();
         }
 
@@ -113,13 +113,11 @@ public class PlayerShip extends Ship{
     public void shoot() {
         if (bullets.size() < MAX_BULLETS) {
             bullets.add(new Bullet(x, y, this.radians));
-            System.out.println("BULLET ADDED");
         }
     }
 
     public void playerHit() {
-        HP --;
-        isAttacked = false;
+        HP--;
     }
 
     public boolean isDead() {

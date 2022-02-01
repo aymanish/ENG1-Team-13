@@ -31,6 +31,7 @@ public class npcShip extends Ship{
         //manually set radians
         radians = 0;
         rotationSpeed = 0;
+
     }
 
     public void update(float dt) {

@@ -13,19 +13,15 @@ import java.util.ArrayList;
 public class College extends GameObject{
 
     public Circle AOE;
-    //public float bulletradians, bulletX, bulletY; //= 3.1415f/2
     public int HP, POINTS;
     public Sprite collegeSprite;
+    public Sprite capturedSprite;
     public Rectangle boundRect;
     public ArrayList<Bullet> bullets;
     public ArrayList<npcShip> NPCs;
     public String png_npc;
-
-    //aymans addition:
-    public boolean isAttacked;
-    public boolean isAOE;
+    public String png_captured = "";
     private final int MAX_COLLEGE_BULLETS = 1;
-    public boolean isCaptured;
 
     public int npcCount = 3;
     //call generateNPC() function:
@@ -41,18 +37,20 @@ public class College extends GameObject{
 
         AOE = new Circle(x,y,300);
 
-        isAttacked = false;
-        isCaptured = false;
-        isAOE = false;
-
     }
 
     //college firing system, we will return a sprite bullet when called
     public void shoot(float radians) {
-        if (!isCaptured) {
+        if (!isCaptured()) {
             if (bullets.size() == MAX_COLLEGE_BULLETS) {return;}
             bullets.add(new Bullet(x + width/2f, y + height/2f, radians));
         }
+    }
+
+    public float shootDirection(float x_coord, float y_coord) {
+        Vector2 bulletDirection = new Vector2(x-x_coord, y-y_coord).nor();
+        float bulletRadians = bulletDirection.angleRad() + 10213.2f;
+        return bulletRadians;
     }
 
         //if (!isCaptured() && playerInRange()) {
@@ -73,27 +71,14 @@ public class College extends GameObject{
   //  }
     //what happens to a college when said college is hit by a bullet from player
     public void collegeHit() {
-        if (!isCaptured) {
+        if (!isCaptured()) {
             HP--;
-            System.out.println("COLLEGE HIT");
-            isAttacked = false;
         }
 
         //players point gains in fireSuccess() method in PlayerShip class
     }
 
-
-    /*
-    //checks if college has been captured
     public boolean isCaptured() {
-        if (HP == 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return HP == 0;
     }
-     */
-
-
 }

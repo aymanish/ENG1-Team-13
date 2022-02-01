@@ -2,6 +2,8 @@ package com.ayman.screen;
 
 import com.ayman.entities.AnneLister;
 import com.ayman.entities.Bullet;
+import com.ayman.entities.College;
+import com.ayman.entities.npcShip;
 import com.ayman.game.MyGame;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Texture;
@@ -31,47 +33,7 @@ public class GameScreen extends ScreenAdapter {
         game.updatePlayerBullets(delta);
         game.updateCollegeBullets(delta);
 
-/*
-        //ayman's code:
-        //UPDATE PLAYER BULLETS:
-        for (int i = 0; i < game.player.bullets.size(); i++) {
 
-            game.player.bullets.get(i).update(delta);
-            //COLLEGE FOR LOOP FUNCTION:
-            if (game.player.bullets.get(i).rectBullet.overlaps(game.AnneLister.boundRect)) {
-                //game.player.bullets.get(i).BulletCollide = true;
-                game.AnneLister.isAttacked = true;
-                System.out.println("BULLET COLLIDE");
-            }
-
-            if ((game.player.bullets.get(i).shouldRemove())||(game.AnneLister.isAttacked)) {
-                game.player.bullets.remove(i);
-                i--;
-                System.out.println("BULLET REMOVED");
-            }
-        }
-
-        //ayman's code:
-        //UPDATE COLLEGE BULLETS:
-        for (int i = 0; i < game.AnneLister.bullets.size(); i++) {
-
-            game.AnneLister.bullets.get(i).update(delta);
-
-            if (game.AnneLister.bullets.get(i).rectBullet.overlaps(game.player.rectPlayer)) {
-                //game.player.bullets.get(i).BulletCollide = true;
-                game.player.isAttacked = true;
-                System.out.println("PLAYER BULLET COLLIDE");
-            }
-
-            if ((game.AnneLister.bullets.get(i).shouldRemove())||(game.player.isAttacked)) {
-                game.AnneLister.bullets.remove(i);
-                i--;
-                System.out.println("PLAYER BULLET REMOVED");
-            }
-        }
-
-
- */
         //camera follows player after player sprite moves (player.update called)
         game.camera.position.set(game.player.x, game.player.y, 0);
         //ensures camera maintains aspect ratio of screen:
@@ -85,7 +47,6 @@ public class GameScreen extends ScreenAdapter {
         game.drawMap();
         game.drawPlayer();
         game.drawColleges();
-
 
         //NPCs:
         for (int i = 0; i <game.AnneLister.npcCount; i++) {
@@ -103,6 +64,8 @@ public class GameScreen extends ScreenAdapter {
 
         //stat for each college
         game.drawCollegeStats();
+
+        game.drawObjectives();
 
         /*
         //draw bullets
@@ -123,98 +86,17 @@ public class GameScreen extends ScreenAdapter {
 
         game.batch.end();
 
-        //ship controls:
-
-        /*
-        //PLAYER-PLAYER COLLISION (player ship class method):
-        if (game.player.rectPlayer.overlaps(game.player2.rectPlayer)) {
-            System.out.println("Player Hit");
-            game.player.dx = -3*game.player.dx/2;
-            game.player.dy = -3*game.player.dx/2;
-
-            game.player2.dx = -3*game.player2.dx/2;
-            game.player2.dy = -3*game.player2.dy/2;
-        }
-        */
 
         ///////////////////GAME LOGIC//////////////////////////////////////////////////////////////////////
 
 
-        /*
-        //update college bullet angle before PLAYER IN RANGE below:
-        //bulletDirection = new Vector2(game.AnneLister.x-game.player.x, game.AnneLister.y-game.player.y).nor();
-        //bulletRadians = bulletDirection.angleRad() + 10213.2f;
 
-        //PLAYER IN RANGE (IMPLEMENT FOR LOOP ON COLLEGE LIST FOR ALL BELOW):
-
-        if (Intersector.overlaps(game.AnneLister.AOE, game.player.rectPlayer)) {
-            game.AnneLister.isAOE = true;
-            System.out.println("AOE Hit");
-            if (!(game.AnneLister.isCaptured)) {
-                game.AnneLister.shoot(bulletRadians);
-            }
-        } else {
-            game.AnneLister.isAOE = false;
-        }
-
-         */
         game.playerInRange();
-
-/*
-        //BULLET COLLEGE COLLISION:
-        if (game.AnneLister.isAttacked) {
-            if (!(game.AnneLister.isCaptured)) {
-                game.AnneLister.collegeHit();
-            }
-            game.AnneLister.isAttacked = false;
-        }
-
- */
         game.bulletCollegeHit();
-/*
-        //PLAYER BULLET COLLISION:
-        if (game.player.isAttacked) {
-            game.player.playerHit();
-        }
-
-        //PLAYER-COLLEGE COLLISION
-        if (game.player.rectPlayer.overlaps(game.AnneLister.boundRect)) {
-            System.out.println("College Hit");
-            //collision:
-            game.player.dx = -3*game.player.dx/2;
-            game.player.dy = -3*game.player.dy/2;
-        }
-
- */
         game.playerBulletHit();
         game.playerCollegeHit();
 
-        /*
-        //PLAYER DEAD:
-        if (game.player.isDead()) {
-            System.out.println("DEAD");
-            //called game function to restart game at end screen)
-            //game.player.x= 600;
-            //game.player.y = 600;
-            //game.player.HP = 10;
-            //game.player.dx = 0;
-            //game.player.dy = 0;
-            game.setScreen(new EndScreen(game));
-        }
-/*
-        //COLLEGE CAPTURED:
-        //AnneLister captured:
-        if ((!game.AnneLister.isCaptured) && game.AnneLister.HP == 0) {
-            System.out.println("CAPTURED");
-            game.AnneLister.isCaptured = true;
-            //this doesnt render in game screen for some reason???
-            game.AnneLister.collegeSprite = game.AnneLister.textureAtlas.createSprite("anneLister_island_captured");
-            game.AnneLister.HP = 10;
-            game.player.POINTS += game.AnneLister.POINTS;
-        }
-
- */
-        game.collegeCaptured();
+        //game.collegeCaptured();
 
         //TASK CHECKLIST:
         if(game.isGameEnd()) {
