@@ -2,8 +2,9 @@ package com.ayman.entities;
 
 public class Goodricke extends College {
     public Goodricke() {
-        x = 1600;
-        y = 900;
+        //ayman: changed college position for game
+        x = 1200;
+        y = 700;
         HP = 5;
         POINTS = 500;
         //set college sprite

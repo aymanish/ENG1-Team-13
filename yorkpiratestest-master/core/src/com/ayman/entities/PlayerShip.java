@@ -22,9 +22,12 @@ public class PlayerShip extends Ship{
     public Rectangle rectPlayer;
     private final int MAX_BULLETS = 5;
 
-    //ayman's code:
     public int captures = 0;
     public int captureScore = 1;
+
+    //ayman's code:
+    public boolean unlocked;
+    public Sprite hearts;
 
     public PlayerShip(ArrayList<Bullet> bullets) {
 
@@ -48,6 +51,8 @@ public class PlayerShip extends Ship{
 
         radians = (3.1415f / 2); // - 1.5708f
         rotationSpeed = 3;
+
+        unlocked = false;
 
     }
 
@@ -92,7 +97,7 @@ public class PlayerShip extends Ship{
         x += dx*dt;
         y += dy*dt;
 
-        //set ship position as well otherwise sprite wont move
+        //set ship position as well otherwise sprite won't move
         sprite.setX(x);
         sprite.setY(y);
 
@@ -105,8 +110,13 @@ public class PlayerShip extends Ship{
             shoot();
         }
 
-        //boundaries:
-        boundaries();
+        //ayman's new code: change player movement restrictions based
+        // on whether boss is unlocked:
+        if (!unlocked) {
+            barrier();
+        } else {
+            boundaries();
+        }
     }
 
     //try changing the shoot method():
@@ -122,5 +132,14 @@ public class PlayerShip extends Ship{
 
     public boolean isDead() {
         return HP == 0;
+    }
+
+    public void barrier() {
+        //ship x-axis boundaries + barrier collision:
+        if(x <= 592) {dx = 0;}
+        if(x >= 1452) {dx = -3*dx/2;}
+        //ship y-axis boundaries:
+        if(y <= 510) {dy = 0;}
+        if(y >= 1380) {dy = 0;}
     }
 }

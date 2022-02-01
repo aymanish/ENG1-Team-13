@@ -2,10 +2,11 @@ package com.ayman.entities;
 
 public class Constantine extends College {
     public Constantine() {
-        x = 2000;
+        //ayman: changed values for BOSS college
+        x = 2260;
         y = 900;
-        HP = 5;
-        POINTS = 500;
+        HP = 10;
+        POINTS = 1000;
         //set college sprite
         png_npc = "ship_CT";
         png_captured = "constantine_island_captured";

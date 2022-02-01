@@ -18,7 +18,7 @@ public class Ship extends GameObject{
 
     public void boundaries() {
         //ship x-axis boundaries:
-        if(x <= 592) {dx = 0;} //dx = -3*dx/2
+        if(x <= 592) {dx = 0;}
         if(x >= 2460) {dx = 0;}
 
         //ship y-axis boundaries:

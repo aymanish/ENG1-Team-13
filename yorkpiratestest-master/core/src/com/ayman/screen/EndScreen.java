@@ -26,9 +26,7 @@ public class EndScreen extends ScreenAdapter {
                     game.setScreen(new TitleScreen(game));
                     //RESET GAME:
                     game.create();
-                    System.out.println("NEW GAME CREATED");
                 }
-
                 return true;
             }
         });
@@ -47,9 +45,9 @@ public class EndScreen extends ScreenAdapter {
 
         game.batch.begin();
         if (game.playerWin()) {
-            game.font.draw(game.batch, "YOU WON! \nPOINTS: "+game.player.POINTS+" \nPRESS ENTER TO RESTART", game.player.x-100, game.player.y);//Gdx.graphics.getHeight() * .25f
+            game.font.draw(game.batch, "YOU WON! \n\nPOINTS: "+game.player.POINTS+" \n\nPRESS ENTER TO RESTART", game.player.x-100, game.player.y);//Gdx.graphics.getHeight() * .25f
         } else {
-            game.font.draw(game.batch, "YOU LOST! \nPOINTS: "+game.player.POINTS+" \nPRESS ENTER TO RESTART", game.player.x-100, game.player.y);//Gdx.graphics.getHeight() * .25f
+            game.font.draw(game.batch, "YOU LOST! \n\nPOINTS: "+game.player.POINTS+" \n\nPRESS ENTER TO RESTART", game.player.x-100, game.player.y);//Gdx.graphics.getHeight() * .25f
         }
         game.batch.end();
     }

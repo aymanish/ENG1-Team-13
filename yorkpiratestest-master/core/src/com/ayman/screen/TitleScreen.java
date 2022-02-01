@@ -21,7 +21,7 @@ public class TitleScreen extends ScreenAdapter{
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keyCode) {
-                if (keyCode == Input.Keys.ENTER) {
+                if (keyCode == Input.Keys.SPACE) {
                     game.setScreen(new GameScreen(game));
                 }
                 return true;
@@ -40,8 +40,8 @@ public class TitleScreen extends ScreenAdapter{
         game.camera.update();
 
         game.batch.begin();
-        //set start screeen.png to player pos
-        game.font.draw(game.batch, "WELCOME TO YORK PIRATES! \nCAPTURE ALL COLLEGES TO WIN! \nPRESS ENTER TO PLAY", game.player.x, game.player.y);
+        //set start screen.png to player pos
+        game.font.draw(game.batch, "WELCOME TO YORK PIRATES! \n\nCAPTURE ALL COLLEGES TO WIN! \n\nPRESS SPACE TO PLAY", game.player.x, game.player.y);
         game.batch.end();
     }
 

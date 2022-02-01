@@ -4,8 +4,9 @@ import java.awt.*;
 
 public class AnneLister extends College {
     public AnneLister() {
-        x = 900; //800/2
-        y = 900; //150
+        //ayman: changed position for game
+        x = 700; //800/2
+        y = 1100; //150
         HP = 5;
         POINTS = 500;
         //set college sprite

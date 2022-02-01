@@ -58,5 +58,5 @@ public class Bullet extends GameObject {
         }
     }
 
-    //piblic void draw(ShapeRendered sr)
+    //public void draw(ShapeRenderer sr)
 }

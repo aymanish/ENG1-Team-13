@@ -41,13 +41,25 @@ public class GameScreen extends ScreenAdapter {
         game.camera.viewportHeight = Gdx.graphics.getHeight()/1.75f;
         game.camera.update();
 
+
         //begin rendering batch
         game.batch.begin();
 
         game.drawMap();
-        game.drawPlayer();
-        game.drawColleges();
 
+        game.drawColleges();
+        game.drawCollegeNPC();
+
+        game.drawPlayer();
+
+        //if unlocked: draw barrier and remove player restriction:
+        game.unlockBoss();
+
+        //draw bullets
+        game.drawPlayerBullets();
+        game.drawCollegeBullets();
+
+        /*
         //NPCs:
         for (int i = 0; i <game.AnneLister.npcCount; i++) {
             game.AnneLister.NPCs.get(i).npcSprite.setPosition(game.AnneLister.NPCs.get(i).x, game.AnneLister.NPCs.get(i).y);
@@ -58,39 +70,26 @@ public class GameScreen extends ScreenAdapter {
             game.Goodricke.NPCs.get(i).npcSprite.draw(game.batch);
         }
 
-        //GAME STATS:
+         */
+
+
+        //DRAW GAME STATS and UI:
+
+        //needs to be defined under MyGame near the end after testing complete:
         game.font.draw(game.batch, "\nx: "+ game.player.x+"    y: "+game.player.y+" \n   shipAngle: "+game.player.angle+" \n shipR: "+game.player.radians +" \n DX: "+game.player.dx + " DY: "+game.player.dy , 700, 700);
         game.font.draw(game.batch, "\nHP: " + game.player.HP + "\nP: " + game.player.POINTS+ "\nAMMO: " + game.player.bullets.size() + "\nSCREENX: " + Gdx.graphics.getWidth(), game.player.x+game.player.width, game.player.y+game.player.height);
-
         //stat for each college
         game.drawCollegeStats();
-
+        //objectives in top left:
         game.drawObjectives();
+        //draw health-bar:
+        game.drawPlayerHearts();
 
-        /*
-        //draw bullets
-        for (int i = 0; i < game.player.bullets.size(); i++) {
-            game.player.bullets.get(i).bulletSprite.draw(game.batch);
-            System.out.println("BULLET DRAWN");
-        }
-
-         //DRAW COLLEGE BULLETS:
-        for (int i = 0; i < game.AnneLister.bullets.size(); i++) {
-            game.AnneLister.bullets.get(i).bulletSprite.draw(game.batch);
-            System.out.println("COLLEGE BULLET DRAWN");
-        }
-        */
-
-        game.drawPlayerBullets();
-        game.drawCollegeBullets();
 
         game.batch.end();
 
 
-        ///////////////////GAME LOGIC//////////////////////////////////////////////////////////////////////
-
-
-
+        //GAME LOGIC:
         game.playerInRange();
         game.bulletCollegeHit();
         game.playerBulletHit();
@@ -102,9 +101,6 @@ public class GameScreen extends ScreenAdapter {
         if(game.isGameEnd()) {
             game.setScreen(new EndScreen(game));
         }
-
-        game.unLockBoss();
-
 
     }
 

@@ -25,11 +25,14 @@ public class MyGame extends Game {
 	public ArrayList<Bullet> bullets;
 
 	//COLLEGE AIM:
-	public Vector2 bulletDirection;
-	public float bulletRadians;
+	//public Vector2 bulletDirection;
+	//public float bulletRadians;
 
 	//start/end screen textures:
 	//public Texture titleScreen, endScreen;
+
+	//ayman new barrier:
+	public Barrier barrier;
 
 
 
@@ -45,6 +48,10 @@ public class MyGame extends Game {
 
 		//initialize map
 		map = new Map();
+
+		//ayman new barrier
+		//initialize barrier:
+		barrier = new Barrier();
 
 		//initialize players
 		bullets = new ArrayList<Bullet>();
@@ -126,6 +133,16 @@ public class MyGame extends Game {
 		}
 	}
 
+	//aymans code:
+	public void drawCollegeNPC() {
+		for (College college: collegeList) {
+			for (int i = 0; i <college.npcCount; i++) {
+				college.NPCs.get(i).npcSprite.setPosition(college.NPCs.get(i).x, college.NPCs.get(i).y);
+				college.NPCs.get(i).npcSprite.draw(batch);
+			}
+		}
+	}
+
 	public void drawPlayerBullets() {
 		for (int i = 0; i < player.bullets.size(); i++) {
 			player.bullets.get(i).bulletSprite.draw(batch);
@@ -141,19 +158,37 @@ public class MyGame extends Game {
 	}
 
 	//function to draw objectives:
-	//OBJECTIVES:
-	//Capture 2 colleges: x / 2
-	//Capture Boss college: x / 1
-	//Move with player
-
 	public void drawObjectives() {
 		font.draw(batch, "\nOBJECTIVES: \nCapture 2 colleges: " + player.captures + "/2" , player.x-500, player.y+270);
-		if (isBossUnlocked()) {
+		if (bossUnlocked()) {
 			if (!playerWin()) {
 				font.draw(batch, "\n\n\nCapture Boss college: 0/1" , player.x-500, player.y+270);
 			} else {
 				font.draw(batch, "\n\n\nCapture Boss college: 1/1" , player.x-500, player.y+270);
 			}
+		}
+	}
+
+	//ayman's new code: RENDER PLAYER HEALTH
+	//EASIER TO DO THIS WAY THAN INITIALIZING A LIST OF SPRITES
+	// FOR ALL 3 HEARTS IN PLAYERSHIP CLASS AS ITS A WASTE OF MEMORY???
+
+	//updates the health bar sprite based on player HP:
+	public void drawPlayerHearts() {
+		if (player.HP == 3) {
+			player.hearts = player.textureAtlas.createSprite("heart3");
+			player.hearts.setPosition(player.x-10, player.y-20);
+			player.hearts.draw(batch);
+		}
+		else if (player.HP == 2) {
+			player.hearts = player.textureAtlas.createSprite("heart2");
+			player.hearts.setPosition(player.x-10, player.y-20);
+			player.hearts.draw(batch);
+		}
+		else if (player.HP == 1) {
+			player.hearts = player.textureAtlas.createSprite("heart1");
+			player.hearts.setPosition(player.x-10, player.y-20);
+			player.hearts.draw(batch);
 		}
 	}
 
@@ -168,6 +203,9 @@ public class MyGame extends Game {
 			}
 		}
 	}
+
+	//ayman:NOT SURE IF WE WANT IT THIS WAY BECAUSE WE WANT THE COLLEGE TO SHOOT THE PLAYER ONLY WHEN ITS CAPTURED RIGHT?
+	//UNLESS YOU THINK THE COLLEGE STILL NEEDS TO BE ABLE TO SHOOT WHILE CAPTURED. THAT'S UNDERSTANDABLE
 
 	//if player bullet hits college then college is attacked, if college captured then hit is registered but no damage dealt
 	public void bulletCollegeHit() {
@@ -185,6 +223,7 @@ public class MyGame extends Game {
 			}
 		}
 	}
+
 
 	//checks if a bullet from a college hits a player, if so damage is dealt to player and hit is registered
 	public void playerBulletHit() {
@@ -219,19 +258,27 @@ public class MyGame extends Game {
 		}
 	}*/
 
+	//ayman new code:
+	//checks if boss is unlocked and restricts player based on that
+	//similarly, draws barrier sprite if locked
+	public void unlockBoss() {
+		if (!bossUnlocked()) {
+			//set barrier:
+			player.unlocked = false;
+			//draw barrier
+			barrier.barrier.setPosition(1452+50, 510);
+			barrier.barrier.draw(batch);
+		} else {
+			System.out.println("BOSS UNLOCKED");
+			//set boundaries:
+			player.unlocked = true;
+			//don't draw barrier
+		}
+	}
 
 	//boolean checks for ending game + unlocking boss:
 	public boolean isGameEnd() {
 		return (playerWin()) || (playerLose());
-	}
-
-	public void unLockBoss() {
-		if (isBossUnlocked()) {
-			//remove barrier
-			System.out.println("BOSS UNLOCKED");
-		} else {
-			//draw barrier
-		}
 	}
 
 	public boolean playerWin() {
@@ -242,7 +289,7 @@ public class MyGame extends Game {
 		return player.isDead();
 	}
 
-	public boolean isBossUnlocked() {
+	public boolean bossUnlocked() {
 		return player.captures == collegeList.size()-1;
 	}
 
