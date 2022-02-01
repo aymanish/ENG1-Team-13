@@ -246,8 +246,6 @@ public class MyGame extends Game {
 		return player.captures == collegeList.size()-1;
 	}
 
-
-
 	@Override
 	public void dispose () {
 		batch.dispose();
