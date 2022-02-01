@@ -1,7 +1,6 @@
 package com.ayman.entities;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Rectangle;
 
 import java.util.ArrayList;
 
@@ -14,7 +13,6 @@ public class Ship extends GameObject{
     protected float deceleration;
     public float angle;
     public ArrayList<Bullet> bullets;
-    public boolean isAttacked = false;
 
     public void boundaries() {
         //ship x-axis boundaries:

@@ -1,17 +1,14 @@
 package com.ayman.game;
 import com.ayman.entities.*;
 import com.ayman.screen.TitleScreen;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Vector2;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class MyGame extends Game {
 	//initialize shared resources: camera, font, spritebatch and game objects
@@ -23,19 +20,9 @@ public class MyGame extends Game {
 	public College AnneLister, Constantine, Goodricke;
 	private ArrayList<College> collegeList = new ArrayList<>();
 	public ArrayList<Bullet> bullets;
-
-	//COLLEGE AIM:
-	//public Vector2 bulletDirection;
-	//public float bulletRadians;
-
-	//start/end screen textures:
-	//public Texture titleScreen, endScreen;
-
-	//ayman new barrier:
 	public Barrier barrier;
-	//ayman new code: screen images:
 	public Screens screens;
-
+	float time;
 
 
 	@Override
@@ -83,12 +70,12 @@ public class MyGame extends Game {
 			}
 		}
 
+		time = 0;
 
 		//set screen to title screen always upon startup:
 		setScreen(new TitleScreen(this));
 	}
 
-	//TODO
 	public void updatePlayerBullets(float delta) {
 		for (College college: collegeList) {
 			for (int i = 0; i < player.bullets.size(); i++) {
@@ -100,7 +87,7 @@ public class MyGame extends Game {
 			}
 		}
 	}
-	//TODO
+
 	public void updateCollegeBullets(float delta) {
 		for (College college: collegeList) {
 			for (int i = 0; i < college.bullets.size(); i++) {
@@ -113,13 +100,11 @@ public class MyGame extends Game {
 		}
 	}
 
-	//ayman's new code:
 	//drawing title and end screens:
 	public void drawTitleScreen() {
 		screens.titleScreen.setPosition(player.x-300, player.y-400);
 		screens.titleScreen.draw(batch);
 	}
-
 	public void drawEndScreen() {
 		screens.endScreen.setPosition(player.x-350, player.y-200);
 		screens.endScreen.draw(batch);
@@ -136,7 +121,6 @@ public class MyGame extends Game {
 			if (college.isCaptured()) {
 				college.capturedSprite.draw(batch);
 			} else {
-				//college.collegeSprite.setPosition(college.x,college.y);
 				college.collegeSprite.draw(batch);
 			}
 		}
@@ -151,7 +135,6 @@ public class MyGame extends Game {
 		}
 	}
 
-	//aymans code:
 	public void drawCollegeNPC() {
 		for (College college: collegeList) {
 			for (int i = 0; i <college.npcCount; i++) {
@@ -177,7 +160,8 @@ public class MyGame extends Game {
 
 	//function to draw objectives:
 	public void drawObjectives() {
-		font.draw(batch, "\nOBJECTIVES: \nCapture 2 colleges: " + player.captures + "/2" , player.x-500, player.y+270);
+		font.draw(batch, "POINTS: "+ player.POINTS +"\nOBJECTIVES: \nCapture 2 colleges: "
+				+ player.captures + "/2" , player.x-500, player.y+270);
 		if (bossUnlocked()) {
 			if (!playerWin()) {
 				font.draw(batch, "\n\n\nCapture Boss college: 0/1" , player.x-500, player.y+270);
@@ -187,27 +171,18 @@ public class MyGame extends Game {
 		}
 	}
 
-	//ayman's new code: RENDER PLAYER HEALTH
-	//EASIER TO DO THIS WAY THAN INITIALIZING A LIST OF SPRITES
-	// FOR ALL 3 HEARTS IN PLAYERSHIP CLASS AS ITS A WASTE OF MEMORY???
+	public void drawTutorial() {
+		time += Gdx.graphics.getDeltaTime();
+		if (time < 10) {
+			font.draw(batch, "Press arrow keys to move", player.x - 80, player.y + 100);
+		} if (time > 5 && time < 10) {
+			font.draw(batch, "Press SPACE to shoot", player.x - 80, player.y + 120);
+		}
+	}
 
 	//updates the health bar sprite based on player HP:
 	public void drawPlayerHearts() {
-		if (player.HP == 3) {
-			player.hearts = player.textureAtlas.createSprite("heart3");
-			player.hearts.setPosition(player.x-10, player.y-20);
-			player.hearts.draw(batch);
-		}
-		else if (player.HP == 2) {
-			player.hearts = player.textureAtlas.createSprite("heart2");
-			player.hearts.setPosition(player.x-10, player.y-20);
-			player.hearts.draw(batch);
-		}
-		else if (player.HP == 1) {
-			player.hearts = player.textureAtlas.createSprite("heart1");
-			player.hearts.setPosition(player.x-10, player.y-20);
-			player.hearts.draw(batch);
-		}
+		player.heartsSprite.draw(batch);
 	}
 
 	//college check if player is in range and shoots if so
@@ -264,21 +239,7 @@ public class MyGame extends Game {
 			}
 		}
 	}
-	/* method now redundant due to refactoring
-	public void collegeCaptured() {
-		for (College college: collegeList) {
-			//COLLEGE CAPTURED:
-			if (college.isCaptured() && !college.captured) {
-				player.POINTS += college.POINTS;
-				player.captures++;
-				college.captured = true;
-			}
-		}
-	}*/
 
-	//ayman new code:
-	//checks if boss is unlocked and restricts player based on that
-	//similarly, draws barrier sprite if locked
 	public void unlockBoss() {
 		if (!bossUnlocked()) {
 			//set barrier:

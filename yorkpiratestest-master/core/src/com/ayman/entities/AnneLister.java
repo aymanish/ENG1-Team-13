@@ -1,7 +1,5 @@
 package com.ayman.entities;
 
-import java.awt.*;
-
 public class AnneLister extends College {
     public AnneLister() {
         //ayman: changed position for game

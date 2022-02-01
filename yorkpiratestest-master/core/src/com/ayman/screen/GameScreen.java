@@ -1,23 +1,17 @@
 package com.ayman.screen;
 
-import com.ayman.entities.AnneLister;
-import com.ayman.entities.Bullet;
-import com.ayman.entities.College;
-import com.ayman.entities.npcShip;
 import com.ayman.game.MyGame;
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen extends ScreenAdapter {
     MyGame game;
 
+    long startTime = TimeUtils.millis();
+
     public GameScreen(MyGame game_instance) {
+
         this.game = game_instance;
     }
 
@@ -59,43 +53,25 @@ public class GameScreen extends ScreenAdapter {
         game.drawPlayerBullets();
         game.drawCollegeBullets();
 
-        /*
-        //NPCs:
-        for (int i = 0; i <game.AnneLister.npcCount; i++) {
-            game.AnneLister.NPCs.get(i).npcSprite.setPosition(game.AnneLister.NPCs.get(i).x, game.AnneLister.NPCs.get(i).y);
-            game.AnneLister.NPCs.get(i).npcSprite.draw(game.batch);
-            game.Constantine.NPCs.get(i).npcSprite.setPosition(game.Constantine.NPCs.get(i).x, game.Constantine.NPCs.get(i).y);
-            game.Constantine.NPCs.get(i).npcSprite.draw(game.batch);
-            game.Goodricke.NPCs.get(i).npcSprite.setPosition(game.Goodricke.NPCs.get(i).x, game.Goodricke.NPCs.get(i).y);
-            game.Goodricke.NPCs.get(i).npcSprite.draw(game.batch);
-        }
-
-         */
-
 
         //DRAW GAME STATS and UI:
-
-        //needs to be defined under MyGame near the end after testing complete:
-        game.font.draw(game.batch, "\nx: "+ game.player.x+"    y: "+game.player.y+" \n   shipAngle: "+game.player.angle+" \n shipR: "+game.player.radians +" \n DX: "+game.player.dx + " DY: "+game.player.dy , 700, 700);
-        game.font.draw(game.batch, "\nHP: " + game.player.HP + "\nP: " + game.player.POINTS+ "\nAMMO: " + game.player.bullets.size() + "\nSCREENX: " + Gdx.graphics.getWidth(), game.player.x+game.player.width, game.player.y+game.player.height);
+        game.drawTutorial();
         //stat for each college
         game.drawCollegeStats();
         //objectives in top left:
         game.drawObjectives();
+        //display tutorial:
+        game.drawTutorial();
         //draw health-bar:
         game.drawPlayerHearts();
 
-
         game.batch.end();
-
 
         //GAME LOGIC:
         game.playerInRange();
         game.bulletCollegeHit();
         game.playerBulletHit();
         game.playerCollegeHit();
-
-        //game.collegeCaptured();
 
         //TASK CHECKLIST:
         if(game.isGameEnd()) {

@@ -2,7 +2,7 @@ package com.ayman.entities;
 
 public class Constantine extends College {
     public Constantine() {
-        //ayman: changed values for BOSS college
+        //changed values for BOSS college
         x = 2260;
         y = 900;
         HP = 10;

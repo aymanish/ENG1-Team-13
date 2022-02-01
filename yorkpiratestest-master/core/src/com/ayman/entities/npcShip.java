@@ -1,14 +1,12 @@
 package com.ayman.entities;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
 
 public class npcShip extends Ship{
 
     public Sprite npcSprite;
     public Rectangle rectNPC;
-    private final int MAX_BULLETS = 0;
 
     public npcShip(String college_png) {
 

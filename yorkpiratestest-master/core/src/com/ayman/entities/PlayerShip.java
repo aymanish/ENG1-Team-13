@@ -1,39 +1,34 @@
 package com.ayman.entities;
 
-import com.ayman.game.MyGame;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
-
 import java.util.ArrayList;
-
-import static java.lang.Math.abs;
 
 public class PlayerShip extends Ship{
 
     public int HP = 3;
     public int POINTS = 0;
-    public Sprite playerSprite;
+    public Sprite playerSprite, heart3, heart2, heart1;
     public Rectangle rectPlayer;
     private final int MAX_BULLETS = 5;
 
     public int captures = 0;
-    public int captureScore = 1;
 
-    //ayman's code:
     public boolean unlocked;
-    public Sprite hearts;
+    public Sprite heartsSprite;
 
     public PlayerShip(ArrayList<Bullet> bullets) {
 
         this.bullets = bullets;
 
         sprite = textureAtlas.createSprite("ship_up");
+        heart3 = textureAtlas.createSprite("heart3");
+        heart2 = textureAtlas.createSprite("heart2");
+        heart1 = textureAtlas.createSprite("heart1");
 
         playerSprite = this.sprite;
         rectPlayer = playerSprite.getBoundingRectangle();
@@ -51,6 +46,10 @@ public class PlayerShip extends Ship{
 
         radians = (3.1415f / 2); // - 1.5708f
         rotationSpeed = 3;
+
+        heartsSprite = heart3;
+
+        heartsSprite.setPosition(x-10, y-20);
 
         unlocked = false;
 
@@ -101,14 +100,20 @@ public class PlayerShip extends Ship{
         sprite.setX(x);
         sprite.setY(y);
 
+        //set hearts position
+        heartsSprite.setX(x-10);
+        heartsSprite.setY(y-20);
+
         //set bounding rectangle position:
-        rectPlayer.x = this.x;
-        rectPlayer.y = this.y;
+        rectPlayer.x = x;
+        rectPlayer.y = y;
 
         //bullet fire
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             shoot();
         }
+
+        updateHearts();
 
         //ayman's new code: change player movement restrictions based
         // on whether boss is unlocked:
@@ -132,6 +137,14 @@ public class PlayerShip extends Ship{
 
     public boolean isDead() {
         return HP == 0;
+    }
+
+    public void updateHearts() {
+        if (HP == 2) {
+            heartsSprite = heart2;
+        } else if (HP == 1) {
+            heartsSprite = heart1;
+        }
     }
 
     public void barrier() {
