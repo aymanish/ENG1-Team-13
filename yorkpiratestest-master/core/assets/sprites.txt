@@ -1,0 +1,117 @@
+sprites.png
+size: 4092, 2055
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+anneLister_island
+  rotate: false
+  xy: 0, 0
+  size: 165, 126
+  orig: 165, 126
+  offset: 0, 0
+  index: -1
+anneLister_island_captured
+  rotate: false
+  xy: 165, 0
+  size: 165, 126
+  orig: 165, 126
+  offset: 0, 0
+  index: -1
+barrier
+  rotate: false
+  xy: 330, 0
+  size: 50, 910
+  orig: 50, 910
+  offset: 0, 0
+  index: -1
+boundary
+  rotate: false
+  xy: 380, 0
+  size: 3000, 2000
+  orig: 3000, 2000
+  offset: 0, 0
+  index: -1
+bullet
+  rotate: false
+  xy: 3380, 0
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+constantine_island
+  rotate: false
+  xy: 3398, 0
+  size: 177, 123
+  orig: 177, 123
+  offset: 0, 0
+  index: -1
+constantine_island_captured
+  rotate: false
+  xy: 3575, 0
+  size: 177, 123
+  orig: 177, 123
+  offset: 0, 0
+  index: -1
+goodricke_island
+  rotate: false
+  xy: 3752, 0
+  size: 170, 126
+  orig: 170, 126
+  offset: 0, 0
+  index: -1
+goodricke_island_captured
+  rotate: false
+  xy: 3922, 0
+  size: 170, 126
+  orig: 170, 126
+  offset: 0, 0
+  index: -1
+heart1
+  rotate: false
+  xy: 0, 2000
+  size: 44, 14
+  orig: 44, 14
+  offset: 0, 0
+  index: -1
+heart2
+  rotate: false
+  xy: 44, 2000
+  size: 44, 14
+  orig: 44, 14
+  offset: 0, 0
+  index: -1
+heart3
+  rotate: false
+  xy: 88, 2000
+  size: 44, 14
+  orig: 44, 14
+  offset: 0, 0
+  index: -1
+ship_AL
+  rotate: false
+  xy: 132, 2000
+  size: 22, 55
+  orig: 22, 55
+  offset: 0, 0
+  index: -1
+ship_CT
+  rotate: false
+  xy: 154, 2000
+  size: 22, 55
+  orig: 22, 55
+  offset: 0, 0
+  index: -1
+ship_GR
+  rotate: false
+  xy: 176, 2000
+  size: 22, 55
+  orig: 22, 55
+  offset: 0, 0
+  index: -1
+ship_up
+  rotate: false
+  xy: 198, 2000
+  size: 22, 55
+  orig: 22, 55
+  offset: 0, 0
+  index: -1
