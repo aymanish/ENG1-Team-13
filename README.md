@@ -3,6 +3,7 @@
 Welcome to our site. Here you will find all of the nessesary URLs and documents containing everything from our project, York Pirates.
 
 ### Code
+The final versions of Code and Deliverables are stored in final_branch. Other branches contain old code for reference purposes
 
 [Link](https://github.com/apj520/ENG1-Team-13/tree/final_branch) 
 
