@@ -13,7 +13,7 @@ The final versions of Code and Deliverables are stored in final_branch. Other br
 
 [3. Architecture](Documentation/Arch1.pdf)
 
-[4. Method Selecton and Planning](url)
+[4. Method Selecton and Planning](Documentation/Plan1.pdf)
 
 [5. Risk Assessment and Mitigation](Documentation/Risk1.pdf) 
 
