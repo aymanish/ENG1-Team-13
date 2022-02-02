@@ -4,26 +4,26 @@ Welcome to our site. Here you will find all of the nessesary URLs and documents 
 
 ### Code
 
-[Link](url) 
+[Link](https://github.com/apj520/ENG1-Team-13/tree/final_branch) 
 
 ### Deliverables
 
-[2. Requirements](url) 
+[2. Requirements](Documentation/Risk1.pdf) 
 
-[3. Architecture](url)
+[3. Architecture](Documentation/Arch1.pdf)
 
 [4. Method Selecton and Planning](url)
 
-[5. Risk Assessment and Mitigation](Documentation/Risks1_NONFINAL.pdf) 
+[5. Risk Assessment and Mitigation](Documentation/Risk1.pdf) 
 
-[6. Implementation](url) 
+[6. Implementation](Documentation/Imp1.pdf) 
  
 
 ### Planning and Weekly Snapshots
 
 #### Planning Overview
 
-[Planning Overview](url)
+[Planning Overview](Weekly_Snapshots/WBS.png)
 
 #### Weekly Snapshots
 Please note that the Red line on each snapshot signifies the end of the respective calender week.
