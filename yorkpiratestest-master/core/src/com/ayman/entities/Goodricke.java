@@ -1,6 +1,15 @@
 package com.ayman.entities;
 
+/**
+ * Extends the college class with information specific to the Constantine College.
+ */
+
 public class Goodricke extends College {
+
+    /**
+     * Constructor for Goodricke class.
+     */
+
     public Goodricke() {
         //ayman: changed college position for game
         x = 1200;

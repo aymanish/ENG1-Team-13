@@ -1,6 +1,15 @@
 package com.ayman.entities;
 
+/**
+ * Extends the college class with information specific to the Constantine College.
+ */
+
 public class Constantine extends College {
+
+    /**
+     * Constructor for Constantine college.
+     */
+
     public Constantine() {
         //changed values for BOSS college
         x = 2260;

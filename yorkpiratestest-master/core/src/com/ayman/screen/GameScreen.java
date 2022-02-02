@@ -3,17 +3,31 @@ package com.ayman.screen;
 import com.ayman.game.MyGame;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.TimeUtils;
+
+/**
+ * Code for the game screen.
+ *
+ * game: instance of a game
+ */
 
 public class GameScreen extends ScreenAdapter {
+
     MyGame game;
 
-    long startTime = TimeUtils.millis();
-
+    /**
+     * Constructor for GameScreen class.
+     * @param game_instance
+     *      Instance of a game.
+     */
     public GameScreen(MyGame game_instance) {
-
         this.game = game_instance;
     }
+
+    /**
+     * {@inheritDoc}
+     * @param delta
+     *      Time between frames.
+     */
 
     @Override
     public void render(float delta) {
@@ -77,8 +91,11 @@ public class GameScreen extends ScreenAdapter {
         if(game.isGameEnd()) {
             game.setScreen(new EndScreen(game));
         }
-
     }
+
+    /**
+     * {@inheritDoc}
+     */
 
     @Override
     public void hide() {

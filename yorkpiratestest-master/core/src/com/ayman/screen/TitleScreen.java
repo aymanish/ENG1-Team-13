@@ -7,17 +7,41 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+/**
+ * Code for the title screen. Appears upon launch of application.
+ *
+ * game: instance of game
+ */
+
 public class TitleScreen extends ScreenAdapter{
 
     MyGame game;
+
+    /**
+     * Constructor for TitleScreen class.
+     * @param game_instance
+     *      Instance of a game.
+     */
 
     public  TitleScreen(MyGame game_instance) {
         this.game = game_instance;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+
     @Override
     public void show(){
         Gdx.input.setInputProcessor(new InputAdapter() {
+
+            /**
+             * {@inheritDoc}
+             * @param keyCode
+             *      Code for a pressed key
+             * @return
+             *      True.
+             */
             @Override
             public boolean keyDown(int keyCode) {
                 if (keyCode == Input.Keys.SPACE) {
@@ -27,6 +51,12 @@ public class TitleScreen extends ScreenAdapter{
             }
         });
     }
+
+    /**
+     * {@inheritDoc}
+     * @param delta
+     *      Time between frames.
+     */
 
     @Override
     public void render(float delta) {
@@ -45,6 +75,9 @@ public class TitleScreen extends ScreenAdapter{
         game.batch.end();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void hide(){
         Gdx.input.setInputProcessor(null);

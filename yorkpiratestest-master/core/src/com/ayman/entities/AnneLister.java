@@ -1,8 +1,14 @@
 package com.ayman.entities;
-
+/**
+ * Extends the college class with information specific to the Anne lister College.
+ */
 public class AnneLister extends College {
+
+    /**
+     * Constructor for AnneLister class.
+     */
+
     public AnneLister() {
-        //ayman: changed position for game
         x = 700; //800/2
         y = 1100; //150
         HP = 5;

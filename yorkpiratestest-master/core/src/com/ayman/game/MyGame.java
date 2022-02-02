@@ -1,4 +1,5 @@
 package com.ayman.game;
+
 import com.ayman.entities.*;
 import com.ayman.screen.TitleScreen;
 import com.badlogic.gdx.Gdx;
@@ -9,6 +10,23 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Intersector;
 import java.util.ArrayList;
 
+/**
+ * Class to represent the main gameplay of the game.
+ *
+ * camera: camera viewpoint for the game
+ * font: renders bitmap fonts
+ * batch: draws 2d rectangles that reference a texture
+ * map: instance of map game object
+ * player: instance of user player game object
+ * annelister: instance of Anne Lister college
+ * Constantine: instance of Constantine college
+ * Goodricke: instance of Goodricke college
+ * collegeList: ArrayList of colleges in the game
+ * bullets: Arraylist of bullets for player
+ * barrier: barrier between boss college and other colleges
+ * screens: screens used in the game
+ * time: time elapsed in a game once started
+ */
 
 public class MyGame extends Game {
 	//initialize shared resources: camera, font, spritebatch and game objects
@@ -17,13 +35,16 @@ public class MyGame extends Game {
 	public SpriteBatch batch;
 	public Map map;
 	public PlayerShip player;
-	public College AnneLister, Constantine, Goodricke;
+	public College anneLister, Constantine, Goodricke;
 	private ArrayList<College> collegeList = new ArrayList<>();
 	public ArrayList<Bullet> bullets;
 	public Barrier barrier;
 	public Screens screens;
 	float time;
 
+	/**
+	 * {@inheritDoc}
+	 */
 
 	@Override
 	public void create () {
@@ -51,13 +72,13 @@ public class MyGame extends Game {
 		player = new PlayerShip(bullets);
 
 		//initialize colleges;
-		AnneLister = new AnneLister();
+		anneLister = new AnneLister();
 		Constantine = new Constantine();
 		Goodricke = new Goodricke();
 
 		//initialize list of colleges
 		collegeList = new ArrayList<>();
-		collegeList.add(AnneLister);
+		collegeList.add(anneLister);
 		collegeList.add(Goodricke);
 		collegeList.add(Constantine);
 
@@ -76,6 +97,12 @@ public class MyGame extends Game {
 		setScreen(new TitleScreen(this));
 	}
 
+	/**
+	 * Updates the list of player bullets and parameters for each bullet
+	 * @param delta
+	 * 		Time between frames.
+	 */
+
 	public void updatePlayerBullets(float delta) {
 		for (College college: collegeList) {
 			for (int i = 0; i < player.bullets.size(); i++) {
@@ -87,6 +114,12 @@ public class MyGame extends Game {
 			}
 		}
 	}
+
+	/**
+	 * Updates the list of college bullets and parameters for each bullet
+	 * @param delta
+	 * 		Time between frames.
+	 */
 
 	public void updateCollegeBullets(float delta) {
 		for (College college: collegeList) {
@@ -100,21 +133,41 @@ public class MyGame extends Game {
 		}
 	}
 
-	//drawing title and end screens:
+	/**
+	 * Draws the title screen
+	 */
+
 	public void drawTitleScreen() {
 		screens.titleScreen.setPosition(player.x-300, player.y-400);
 		screens.titleScreen.draw(batch);
 	}
+
+	/**
+	 * Draws the end screen.
+	 */
+
 	public void drawEndScreen() {
 		screens.endScreen.setPosition(player.x-350, player.y-200);
 		screens.endScreen.draw(batch);
 	}
 
+	/**
+	 * Draws the game map.
+	 */
+
 	public void drawMap() {map.map.draw(batch);
 	}
 
+	/**
+	 * Draws the player.
+	 */
+
 	public void drawPlayer() {player.sprite.draw(batch);
 	}
+
+	/**
+	 * Draws the colleges
+	 */
 
 	public void drawColleges() {
 		for (College college: collegeList) {
@@ -126,6 +179,10 @@ public class MyGame extends Game {
 		}
 	}
 
+	/**
+	 * Displays the stats for each college
+	 */
+
 	public void drawCollegeStats() {
 		for (College college: collegeList) {
 			//stat for each college
@@ -134,6 +191,10 @@ public class MyGame extends Game {
 					college.x+college.width, college.y+college.height);
 		}
 	}
+
+	/**
+	 * Draws the NPC ships
+	 */
 
 	public void drawCollegeNPC() {
 		for (College college: collegeList) {
@@ -144,11 +205,19 @@ public class MyGame extends Game {
 		}
 	}
 
+	/**
+	 * Draws the bullets shot by the player
+	 */
+
 	public void drawPlayerBullets() {
 		for (int i = 0; i < player.bullets.size(); i++) {
 			player.bullets.get(i).bulletSprite.draw(batch);
 		}
 	}
+
+	/**
+	 * Draws the colleges bullets
+	 */
 
 	public void drawCollegeBullets() {
 		for (College college: collegeList) {
@@ -158,7 +227,10 @@ public class MyGame extends Game {
 		}
 	}
 
-	//function to draw objectives:
+	/**
+	 * Displays the game objectives
+	 */
+
 	public void drawObjectives() {
 		font.draw(batch, "POINTS: "+ player.POINTS +"\nOBJECTIVES: \nCapture 2 colleges: "
 				+ player.captures + "/2" , player.x-500, player.y+270);
@@ -171,6 +243,10 @@ public class MyGame extends Game {
 		}
 	}
 
+	/**
+	 * Displays the game tutorial
+	 */
+
 	public void drawTutorial() {
 		time += Gdx.graphics.getDeltaTime();
 		if (time < 10) {
@@ -180,15 +256,20 @@ public class MyGame extends Game {
 		}
 	}
 
-	//updates the health bar sprite based on player HP:
+	/**
+	 * Displays the players lives remaining
+	 */
+
 	public void drawPlayerHearts() {
 		player.heartsSprite.draw(batch);
 	}
 
-	//college check if player is in range and shoots if so
+	/**
+	 * Detects if a player is in range of a college. College shoots if so.
+	 */
+
 	public void playerInRange() {
 		for (College college: collegeList) {
-			//bullet radian was here initially:
 			if (Intersector.overlaps(college.AOE, player.rectPlayer)) {
 				if (!(college.isCaptured())) {
 					college.shoot(college.shootDirection(player.x,player.y));
@@ -197,10 +278,10 @@ public class MyGame extends Game {
 		}
 	}
 
-	//ayman:NOT SURE IF WE WANT IT THIS WAY BECAUSE WE WANT THE COLLEGE TO SHOOT THE PLAYER ONLY WHEN ITS CAPTURED RIGHT?
-	//UNLESS YOU THINK THE COLLEGE STILL NEEDS TO BE ABLE TO SHOOT WHILE CAPTURED. THAT'S UNDERSTANDABLE
+	/**
+	 * Checks if a bullet from the player hits a college and subsequent actions if so.
+	 */
 
-	//if player bullet hits college then college is attacked, if college captured then hit is registered but no damage dealt
 	public void bulletCollegeHit() {
 		for (College college: collegeList) {
 			for (Bullet bullet : player.bullets) {
@@ -217,8 +298,9 @@ public class MyGame extends Game {
 		}
 	}
 
-
-	//checks if a bullet from a college hits a player, if so damage is dealt to player and hit is registered
+	/**
+	 * Checks if a bullet from a college hits a player, if so damage is dealt to player and hit is registered.
+	 */
 	public void playerBulletHit() {
 		for (College college: collegeList) {
 			for (Bullet bullet : college.bullets) {
@@ -230,7 +312,10 @@ public class MyGame extends Game {
 		}
 	}
 
-	//checks if player collides with college, collision physics if so
+	/**
+	 * Checks if player collides with college, collision physics if so
+	 */
+
 	public void playerCollegeHit() {
 		for (College college: collegeList) {
 			if (player.rectPlayer.overlaps(college.boundRect)) {
@@ -240,37 +325,64 @@ public class MyGame extends Game {
 		}
 	}
 
+	/**
+	 * Unlocks the boss college
+	 */
+
 	public void unlockBoss() {
 		if (!bossUnlocked()) {
 			//set barrier:
 			player.unlocked = false;
-			//draw barrier
 			barrier.barrier.setPosition(1452+50, 510);
 			barrier.barrier.draw(batch);
 		} else {
-			System.out.println("BOSS UNLOCKED");
 			//set boundaries:
 			player.unlocked = true;
 			//don't draw barrier
 		}
 	}
 
-	//boolean checks for ending game + unlocking boss:
+	/**
+	 * Checks if the game has reached its end.
+	 * @return
+	 * 		True or false.
+	 */
+
 	public boolean isGameEnd() {
 		return (playerWin()) || (playerLose());
 	}
+
+	/**
+	 * Checks if the player has won.
+	 * @return
+	 * 		True or false.
+	 */
 
 	public boolean playerWin() {
 		return player.captures == collegeList.size();
 	}
 
+	/**
+	 * Checks if the player has lost.
+	 * @return
+	 * 		True or false.
+	 */
 	public boolean playerLose() {
 		return player.isDead();
 	}
 
+	/**
+	 * Checks if the boss can be unlocked
+	 * @return
+	 * 		True or false.
+	 */
 	public boolean bossUnlocked() {
 		return player.captures == collegeList.size()-1;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 
 	@Override
 	public void dispose () {

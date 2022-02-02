@@ -7,13 +7,29 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 
+/**
+ * Code for the End game screen, the one displayed after all colleges are captured or the player boats HP reaches 0
+ *
+ * game: instance of a game
+ */
+
 public class EndScreen extends ScreenAdapter {
 
     MyGame game;
 
+    /**
+     * Constructor of EndScreen class.
+     * @param game_instance
+     *      Instance of a game.
+     */
+
     public EndScreen(MyGame game_instance) {
         this.game = game_instance;
     }
+
+    /**
+     * {@inheritDoc}
+     */
 
     @Override
     public void show() {
@@ -31,6 +47,12 @@ public class EndScreen extends ScreenAdapter {
             }
         });
     }
+
+    /**
+     * {@inheritDoc}
+     * @param delta
+     *      Time between frames.
+     */
 
     @Override
     public void render(float delta) {
@@ -53,6 +75,10 @@ public class EndScreen extends ScreenAdapter {
         }
         game.batch.end();
     }
+
+    /**
+     * {@inheritDoc}
+     */
 
     @Override
     public void hide() {

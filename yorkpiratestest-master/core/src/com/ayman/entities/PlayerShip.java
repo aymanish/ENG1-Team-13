@@ -8,6 +8,23 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import java.util.ArrayList;
 
+/**
+ * Class for the ship that is controlled by the user.
+ *
+ * HP: health points for the player
+ * POINTS: points score for the player
+ * playerSprite: Sprite that represents the player
+ * heart3: Sprite representing player with 3 lives
+ * heart2: Sprite representing player with 2 lives
+ * heart1: Sprite representing player with 1 life
+ * rectPlayer: bounding rectangle of the player sprite
+ * MAX_BULLETS: maximum number of bullets that can be rendered from a player shooting
+ * captures: Number of colleges the player has captured
+ * unlocked: boolean value representing if a player has unlocked the boss stage of the game
+ * heartSprite: Sprite that represents the players lives
+ *
+ */
+
 public class PlayerShip extends Ship{
 
     public int HP = 3;
@@ -15,11 +32,15 @@ public class PlayerShip extends Ship{
     public Sprite playerSprite, heart3, heart2, heart1;
     public Rectangle rectPlayer;
     private final int MAX_BULLETS = 5;
-
     public int captures = 0;
-
     public boolean unlocked;
     public Sprite heartsSprite;
+
+    /**
+     * Constructor of the PlayerShip class.
+     * @param bullets
+     *      Arraylist of bullets the player has fired.
+     */
 
     public PlayerShip(ArrayList<Bullet> bullets) {
 
@@ -54,6 +75,12 @@ public class PlayerShip extends Ship{
         unlocked = false;
 
     }
+
+    /**
+     * Updates parameters of the player every frame
+     * @param dt
+     *      Delta, time between frames.
+     */
 
     //player ship control based on input bools:
     public void update(float dt) {
@@ -124,20 +151,35 @@ public class PlayerShip extends Ship{
         }
     }
 
-    //try changing the shoot method():
+    /**
+     * Method that fires a bullet, adds the bullet to bullet list
+     */
     public void shoot() {
         if (bullets.size() < MAX_BULLETS) {
             bullets.add(new Bullet(x, y, this.radians));
         }
     }
 
+    /**
+     * Decreases health points by one when player has been hit
+     */
+
     public void playerHit() {
         HP--;
     }
 
+    /**
+     * Checks if player has zero health points
+     * @return
+     *      True or false.
+     */
     public boolean isDead() {
         return HP == 0;
     }
+
+    /**
+     * Updates sprite based on health points
+     */
 
     public void updateHearts() {
         if (HP == 2) {
@@ -146,6 +188,10 @@ public class PlayerShip extends Ship{
             heartsSprite = heart1;
         }
     }
+
+    /**
+     * Sets the barrier that the ship experiences between boss college and other colleges
+     */
 
     public void barrier() {
         //ship x-axis boundaries + barrier collision:
