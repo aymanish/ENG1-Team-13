@@ -1,22 +1,22 @@
 ## ENG1 Team 13
 
-Welcome to our site. Here you will find all of the nessesary URLs containing everything from our project.
+Welcome to our site. Here you will find all of the nessesary URLs and documents containing everything from our project, York Pirates.
 
 ### Code
 
 [Link](url) 
 
-### Documentation
+### Deliverables
 
-[Requirements](url) 
+[2. Requirements](url) 
 
-[Risks](Documentation/Risks1_NONFINAL.pdf) 
+[3. Architecture](url)
 
-[Implementation](url) 
+[4. Method Selecton and Planning](url)
 
-[Planning](url) 
+[5. Risk Assessment and Mitigation](Documentation/Risks1_NONFINAL.pdf) 
 
-[Architecture](url) 
+[6. Implementation](url) 
  
 
 ### Planning and Weekly Snapshots
